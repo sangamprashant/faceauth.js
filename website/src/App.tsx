@@ -1,3 +1,4 @@
+import "./App.css";
 import {
   Access,
   Contact,
@@ -8,12 +9,9 @@ import {
   Navbar,
   Service,
   Tutorial,
-} from "@/components";
-import React from "react";
+} from "./components";
 
-type Props = {};
-
-const Home = (props: Props) => {
+function App() {
   return (
     <>
       <main className="main" id="top">
@@ -29,6 +27,6 @@ const Home = (props: Props) => {
       <Tutorial />
     </>
   );
-};
+}
 
-export default Home;
+export default App;

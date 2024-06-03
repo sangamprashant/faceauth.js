@@ -4,13 +4,13 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
+
     <nav
-      className="navbar navbar-expand-lg navbar-light sticky-top"
+      className="navbar navbar-expand-lg navbar-light sticky-top backdrop"
       data-navbar-on-scroll="data-navbar-on-scroll"
       style={{
         backgroundImage: "none",
         backgroundColor: "#f9fafdb3",
-        transition: "background-color 0s ease 0s, padding 0.35s ease 0s",
       }}
     >
       <div className="container">
@@ -66,6 +66,7 @@ const Navbar = (props: Props) => {
         </div>
       </div>
     </nav>
+
   );
 };
 
