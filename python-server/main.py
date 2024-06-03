@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import cv2
 import numpy as np
 from pymongo import MongoClient
@@ -10,14 +11,16 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to MongoDB
 mongo_uri= os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+mongo_dbname= os.getenv("MONGODB_DATABASE", "face_recognition_db")
+
 client = MongoClient(mongo_uri)
-db = client['face_recognition_db']
+db = client[mongo_dbname]
 users_collection = db['users']
 
- 
 base_url = os.getenv("BASE_URL", "http://127.0.0.1:8000")
 
 # Load the pre-trained face detection model from OpenCV
