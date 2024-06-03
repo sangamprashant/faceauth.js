@@ -1,8 +1,6 @@
-import React from "react";
 
-type Props = {};
 
-const Marketing = (props: Props) => {
+const Marketing = () => {
   return (
     <section className="pt-5" id="marketing">
       <div className="container">

@@ -1,8 +1,5 @@
-import React from "react";
 
-type Props = {};
-
-const Service = (props: Props) => {
+const Service = () => {
   return (
     <section className="pt-5 pt-md-9 mb-6" id="feature">
       <div

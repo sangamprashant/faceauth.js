@@ -1,8 +1,6 @@
-import React from "react";
 
-type Props = {};
 
-const Hero = (props: Props) => {
+const Hero = () => {
   return (
     <section className="pt-7">
       <div className="container">

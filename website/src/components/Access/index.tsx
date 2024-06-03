@@ -1,8 +1,7 @@
-import React from "react";
 
-type Props = {};
 
-const Access = (props: Props) => {
+
+const Access = () => {
   return (
     <section className="pt-5" id="validation">
       <div className="container">

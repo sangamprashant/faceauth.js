@@ -1,8 +1,8 @@
-import React from "react";
+
 
 type Props = {};
 
-const Tutorial: React.FC<Props> = (props) => {
+const Tutorial: React.FC<Props> = () => {
   return (
     <div className="text-danger">
       <div

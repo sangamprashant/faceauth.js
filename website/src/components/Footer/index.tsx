@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <React.Fragment>
       <section className="pb-2 pb-lg-5">

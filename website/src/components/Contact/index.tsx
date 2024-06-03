@@ -1,8 +1,6 @@
-import React from "react";
 
-type Props = {};
 
-const Contact = (props: Props) => {
+const Contact = () => {
   return (
     <section className="py-md-11 py-8" id="superhero">
       <div
