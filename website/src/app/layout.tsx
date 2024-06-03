@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Head from "next/head";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,51 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="assets/img/favicons/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="assets/img/favicons/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="assets/img/favicons/favicon-16x16.png"
-        />
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="assets/img/favicons/favicon.png"
-        />
-        <link rel="manifest" href="assets/img/favicons/manifest.json" />
-        <meta
-          name="msapplication-TileImage"
-          content="assets/img/favicons/mstile-150x150.png"
-        />
-        <meta name="theme-color" content="#ffffff" />
-
-        <link href="assets/css/theme.css" rel="stylesheet" />
-      </head>
+      <head></head>
       <body>{children}</body>
-      <script src="vendors/@popperjs/popper.min.js"></script>
-      <script src="vendors/bootstrap/bootstrap.min.js"></script>
-      <script src="vendors/is/is.min.js"></script>
-      <script src="vendors/fontawesome/all.min.js"></script>
-      <script src="assets/js/theme.js"></script>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-        rel="stylesheet"
-      />
+      <script src="/vendors/@popperjs/popper.min.js"></script>
+      <script src="/vendors/bootstrap/bootstrap.min.js"></script>
+      <script src="/vendors/is/is.min.js"></script>
+      <script src="/vendors/fontawesome/all.min.js"></script>
+      <script src="/assets/js/theme.js"></script>
     </html>
   );
 }
