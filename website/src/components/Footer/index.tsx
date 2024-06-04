@@ -41,7 +41,7 @@ const Footer = () => {
                 </ul>
               </div>
             ))}
-            <div className="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4">
+            <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4">
               <motion.p className="fs-2 mb-lg-4" whileHover={{ scale: 1.1 }}>
                 knowing you're always on the best energy deal.
               </motion.p>

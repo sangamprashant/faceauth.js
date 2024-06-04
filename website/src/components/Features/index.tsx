@@ -52,13 +52,13 @@ const Features = () => {
       <div className="container">
         <div className="row">
           <motion.div
-            className="col-lg-6"
+            className="col-lg-6 d-flex justify-content-center"
             initial="initial"
             animate={imgInView ? "animate" : "initial"}
             variants={fromLeftVariants}
             ref={imgRef}
           >
-            <img className="img-fluid" src="assets/images/features.jpg" alt="" />
+            <motion.img whileHover={hoverEffect} className="img-fluid" src="assets/images/features.jpg" alt="" />
           </motion.div>
           <motion.div
             className="col-lg-6"

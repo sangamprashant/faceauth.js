@@ -3,6 +3,8 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { services } from "../Strings";
 
+const isMobile = window.innerWidth <= 768;
+
 interface ServiceItemProps {
   service: {
     title: string;
@@ -92,7 +94,7 @@ const ServiceItem = ({ service }: ServiceItemProps) => {
 
   return (
     <motion.div
-      className="col-lg-4 col-md-6 mb-4"
+      className={`col-lg-4 col-md-6 mb-4 ${isMobile ? "text-center" : ""}`}
       variants={itemVariants}
       transition={itemTransition}
       ref={ref}
@@ -104,8 +106,8 @@ const ServiceItem = ({ service }: ServiceItemProps) => {
         width="75"
         alt={service.title}
       />
-      <motion.h4 className="mb-3">{service.title}</motion.h4>
-      <motion.p className="mb-0 fw-medium text-secondary">
+      <motion.h4 className={`mb-3 `}>{service.title}</motion.h4>
+      <motion.p className={`mb-0 fw-medium text-secondary`}>
         {service.description}
       </motion.p>
     </motion.div>

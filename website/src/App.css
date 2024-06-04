@@ -30,7 +30,3 @@ body {
 .text-theme {
   color: #5f319d;
 }
-
-.features-jpg{
-  filter: hue-rotate(10deg);
-}

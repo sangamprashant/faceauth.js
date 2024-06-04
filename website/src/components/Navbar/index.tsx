@@ -14,13 +14,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav
+    <motion.nav
       className="navbar navbar-expand-lg navbar-light sticky-top backdrop"
       data-navbar-on-scroll="data-navbar-on-scroll"
       style={{
         backgroundImage: "none",
         backgroundColor: "#f9fafdb3",
       }}
+      variants={navItemVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ delay: 0.1, duration: 0.7 }}
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
@@ -28,8 +32,8 @@ const Navbar = () => {
             src="assets/images/tag.png"
             height="45"
             alt="logo"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 1 }}
           />
         </Link>
@@ -72,7 +76,7 @@ const Navbar = () => {
                 variants={buttonVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay:.1, duration: .7 }}
+                transition={{ delay: 0.1, duration: 0.7 }}
               >
                 Login
               </motion.span>
@@ -90,7 +94,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

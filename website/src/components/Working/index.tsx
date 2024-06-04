@@ -11,8 +11,13 @@ const Working = () => {
     triggerOnce: false,
   });
 
+  const hoverEffect = {
+    scale: 1.05,
+    transition: { duration: 0.3 },
+  };
+
   return (
-    <section className="pt-5" id="validation">
+    <section className="pt-5">
       <div className="container">
         <div className="row align-items-center">
           <motion.div
@@ -36,6 +41,7 @@ const Working = () => {
                     x: contentInView ? 0 : -100,
                   }}
                   transition={{ delay: 0.5 + index * 0.5, duration: 1 }}
+                  whileHover={hoverEffect}
                 >
                   {content.title}
                 </motion.h4>
@@ -47,6 +53,7 @@ const Working = () => {
                     x: contentInView ? 0 : -100,
                   }}
                   transition={{ delay: 1 + index * 0.5, duration: 1 }}
+                  whileHover={hoverEffect}
                 >
                   {content.description}
                 </motion.p>
@@ -54,13 +61,21 @@ const Working = () => {
             ))}
           </motion.div>
           <motion.div
-            className="col-lg-6"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: imgInView ? 1 : 0, x: imgInView ? 0 : 100 }}
+            className="col-lg-6 d-flex justify-content-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: imgInView ? 1 : 0 }}
             transition={{ delay: 1, duration: 1 }}
             ref={imgRef}
           >
-            <img className="img-fluid" src="assets/images/working.jpg" alt="" />
+            <motion.img
+              width="100%"
+              src="assets/images/working.jpg"
+              alt=""
+              initial={{ opacity: 0 }}
+              animate={{ opacity: imgInView ? 1 : 0 }}
+              transition={{ duration: 1 }}
+              whileHover={hoverEffect}
+            />
           </motion.div>
         </div>
       </div>

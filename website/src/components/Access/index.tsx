@@ -26,7 +26,10 @@ const Access = () => {
           <motion.div
             className="col-lg-6"
             initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: titleInView ? 1 : 0, x: titleInView ? 0 : -100 }}
+            animate={{
+              opacity: titleInView ? 1 : 0,
+              x: titleInView ? 0 : -100,
+            }}
             transition={{ duration: 1 }}
             ref={titleRef}
           >
@@ -35,7 +38,10 @@ const Access = () => {
             <motion.p
               className="mb-4 fw-medium text-secondary"
               initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: textInView ? 1 : 0, x: textInView ? 0 : -100 }}
+              animate={{
+                opacity: textInView ? 1 : 0,
+                x: textInView ? 0 : -100,
+              }}
               transition={{ delay: 0.5, duration: 1 }}
               ref={textRef}
               whileHover={hoverEffect}
@@ -74,15 +80,15 @@ const Access = () => {
             ))}
           </motion.div>
           <motion.div
-            className="col-lg-6"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: imageInView ? 1 : 0, x: imageInView ? 0 : 100 }}
+            className="col-lg-6 d-flex justify-content-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: imageInView ? 1 : 0 }}
             transition={{ delay: 1, duration: 1 }}
             ref={imageRef}
             whileHover={hoverEffect}
           >
             <img
-              className="img-fluid features-jpg"
+              width="100%"
               src="assets/images/secure.png"
               alt="Secure"
             />
