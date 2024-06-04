@@ -17,7 +17,7 @@ const Tutorial: React.FC<Props> = () => {
             <iframe
               className="rounded"
               style={{ width: "100%", height: "500px" }}
-              src="https://www.youtube.com/embed/_lhdhL4UDIo"
+              src="https://www.youtube.com/embed/GIiLVh6gfsE?si=71NWKKAHVmBnLax6"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

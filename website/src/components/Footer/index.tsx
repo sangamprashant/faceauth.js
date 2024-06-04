@@ -1,5 +1,6 @@
+import { motion } from "framer-motion";
 import React from "react";
-
+import { FooterData } from "../Strings";
 
 const Footer = () => {
   return (
@@ -8,91 +9,42 @@ const Footer = () => {
         <div className="container">
           <div className="row border-top border-top-secondary pt-7">
             <div className="col-lg-3 col-md-6 mb-4 mb-md-6 mb-lg-0 mb-sm-2 order-1 order-md-1 order-lg-1">
-              <img
+              <motion.img
                 className="mb-4"
-                src="assets/img/logo.svg"
+                src="assets/images/tag.png"
                 width="184"
                 alt=""
+                whileHover={{ scale: 1.1 }}
               />
             </div>
-            <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2">
-              <p className="fs-2 mb-lg-4">Quick Links</p>
-              <ul className="list-unstyled mb-0">
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    About us
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Contact
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    FAQ
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3">
-              <p className="fs-2 mb-lg-4">Legal stuff</p>
-              <ul className="list-unstyled mb-0">
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Disclaimer
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Financing
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li className="mb-1">
-                  <a
-                    className="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                  >
-                    Terms of Service
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {FooterData.map((data, index) => (
+              <div
+                className="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
+                key={index}
+              >
+                <motion.p className="fs-2 mb-lg-4" whileHover={{ scale: 1.1 }}>
+                  {data.title}
+                </motion.p>
+                <ul className="list-unstyled mb-0">
+                  {data.links.map((link, i) => (
+                    <li className="mb-1" key={i}>
+                      <a
+                        className="link-900 text-secondary text-decoration-none"
+                        href={link.link}
+                      >
+                        <motion.span whileHover={{ scale: 1.1 }}>
+                          {link.label}
+                        </motion.span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
             <div className="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4">
-              <p className="fs-2 mb-lg-4">
+              <motion.p className="fs-2 mb-lg-4" whileHover={{ scale: 1.1 }}>
                 knowing you're always on the best energy deal.
-              </p>
+              </motion.p>
               <form className="mb-3">
                 <input
                   className="form-control"
@@ -101,9 +53,12 @@ const Footer = () => {
                   aria-label="phone"
                 />
               </form>
-              <button className="btn btn-warning fw-medium py-1">
+              <motion.button
+                className="btn btn-theme fw-medium py-1"
+                whileHover={{ scale: 1.1 }}
+              >
                 Sign up Now
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -133,7 +88,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        {/* <!-- end of .container--> */}
       </section>
     </React.Fragment>
   );

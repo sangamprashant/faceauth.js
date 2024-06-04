@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Volkhov:wght@700&display=swap");
-@import url("/assets/css/theme.css");
+@import url("/assets/css/theme.min.css");
 * {
   margin: 0;
   padding: 0;
@@ -14,4 +14,23 @@ body {
 .backdrop {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+}
+
+.btn-theme {
+  background-color: #5f319d;
+  border-color: #300270;
+  color: #ffffff;
+}
+.btn-theme:hover,
+.btn-theme:active {
+  background-color: #2c0e52;
+  border-color: #1e0146;
+  color: #ffffff;
+}
+.text-theme {
+  color: #5f319d;
+}
+
+.features-jpg{
+  filter: hue-rotate(10deg);
 }
