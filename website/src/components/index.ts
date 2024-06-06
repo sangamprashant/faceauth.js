@@ -10,6 +10,7 @@ import Access from "./Access";
 import Home from "./Home";
 import Result from "./Result";
 import Working from "./Working";
+import Documentation from "./Documentation";
 
 export {
   Navbar,
@@ -22,6 +23,7 @@ export {
   Features,
   Access,
   Home,
+  Documentation,
   Result,
   Working,
 };

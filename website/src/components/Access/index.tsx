@@ -20,7 +20,7 @@ const Access = () => {
   };
 
   return (
-    <section className="pt-5" id="validation">
+    <section className="pt-5" id="features">
       <div className="container">
         <div className="row align-items-center">
           <motion.div

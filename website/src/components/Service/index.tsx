@@ -43,7 +43,7 @@ const Service = () => {
   };
 
   return (
-    <section className="pt-5 pt-md-9 mb-6" id="feature">
+    <section className="pt-5 pt-md-9 mb-6" id="services">
       <div
         className="bg-holder z-index--1 bottom-0 d-none d-lg-block"
         style={{

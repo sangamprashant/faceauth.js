@@ -56,7 +56,7 @@ const Contact = () => {
               whileHover={{ scale: 1.05 }}
               variants={itemVariants}
             >
-              Contact our expert
+              Contact Our Expert
             </motion.button>
           </motion.div>
         </div>

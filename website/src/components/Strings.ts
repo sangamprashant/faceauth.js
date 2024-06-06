@@ -45,15 +45,15 @@ const FooterData = [
 
 const NavPublicItems = [
   {
-    label: "Product",
-    link: "/#feature",
+    label: "Services",
+    link: "/#services",
   },
   {
-    label: "Customers",
-    link: "/#validation",
+    label: "Features",
+    link: "/#features",
   },
   {
-    label: "Pricing",
+    label: "Contact",
     link: "/#superhero",
   },
   {
@@ -102,27 +102,26 @@ const contentArray = [
   },
 ];
 
-  // Array of service data
-  const services = [
-    {
-      title: "Create Account",
-      description:
-        "Easily create an account on Faceauth.js platform to get started.",
-      image: "assets/images/service/user.png",
-    },
-    {
-      title: "Manage Projects",
-      description:
-        "Organize and manage your projects efficiently using Faceauth.js.",
-      image: "assets/images/service/project.png",
-    },
-    {
-      title: "Unique Access Keys",
-      description:
-        "Each project is assigned a unique access key for secure data access.",
-      image: "assets/images/service/key.png",
-    },
-  ];
+// Array of service data
+const services = [
+  {
+    title: "Create Account",
+    description:
+      "Easily create an account on Faceauth.js platform to get started.",
+    image: "assets/images/service/user.png",
+  },
+  {
+    title: "Manage Projects",
+    description:
+      "Organize and manage your projects efficiently using Faceauth.js.",
+    image: "assets/images/service/project.png",
+  },
+  {
+    title: "Unique Access Keys",
+    description:
+      "Each project is assigned a unique access key for secure data access.",
+    image: "assets/images/service/key.png",
+  },
+];
 
 export { FooterData, NavPublicItems, contentArray, featuresData, services };
-
