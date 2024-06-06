@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import uuid
+from datetime import timedelta
 from app import users, app
 from schema.user import RegistrationSchema
 from marshmallow import ValidationError
 from bson import ObjectId
+from auth.sendmail import send_mail
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -38,8 +40,8 @@ def register():
             'projects': []
         }
         users.insert_one(new_user)
-        token = create_access_token(identity=str(new_user['_id']))
-
+        token = create_access_token(identity=str(new_user['_id']), expires_delta=timedelta(minutes=10))
+        send_mail(email, token)
         return jsonify({"api_key": api_key, "success": True, "token": token}), 201
 
     except ValidationError as e:
@@ -58,6 +60,7 @@ def login():
     access_token = create_access_token(identity=str(user['_id']))
     return jsonify(access_token=access_token), 200
 
+# route to get profile of authenticated user
 @auth_bp.route('/profile', methods=['GET'])
 @jwt_required()
 def profile():

@@ -11,6 +11,7 @@ import Home from "./Home";
 import Result from "./Result";
 import Working from "./Working";
 import Documentation from "./Documentation";
+import ModalShow from "./Modal";
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   Documentation,
   Result,
   Working,
+  ModalShow
 };

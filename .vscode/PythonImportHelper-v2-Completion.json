@@ -1,5 +1,86 @@
 [
     {
+        "label": "smtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "smtplib",
+        "description": "smtplib",
+        "detail": "smtplib",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "mongo",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEMultipart",
+        "importPath": "email.mime.multipart",
+        "description": "email.mime.multipart",
+        "isExtraImport": true,
+        "detail": "email.mime.multipart",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "Thread",
+        "importPath": "threading",
+        "description": "threading",
+        "isExtraImport": true,
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -169,43 +250,11 @@
         "documentation": {}
     },
     {
-        "label": "users",
-        "importPath": "app",
-        "description": "app",
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "app",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "mongo",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "app",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "db",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -254,6 +303,14 @@
         "description": "bson",
         "isExtraImport": true,
         "detail": "bson",
+        "documentation": {}
+    },
+    {
+        "label": "send_mail",
+        "importPath": "auth.sendmail",
+        "description": "auth.sendmail",
+        "isExtraImport": true,
+        "detail": "auth.sendmail",
         "documentation": {}
     },
     {
@@ -431,6 +488,15 @@
         "documentation": {}
     },
     {
+        "label": "send_mail",
+        "kind": 2,
+        "importPath": "python-server.auth.sendmail",
+        "description": "python-server.auth.sendmail",
+        "peekOfCode": "def send_mail(email, token):\n    # Define email sender and receiver\n    sender_email = app.config['EMAIL_SENDER']\n    receiver_email = email\n    password = app.config['EMAIL_PASSWORD']\n    # public link \n    publicLink = app.config['PUBLIC_LINK']\n    # Create the email subject and HTML content\n    subject = \"Verify Your Account\"\n    verify_link = f\"{publicLink}/verify?token={token}\"",
+        "detail": "python-server.auth.sendmail",
+        "documentation": {}
+    },
+    {
         "label": "register",
         "kind": 2,
         "importPath": "python-server.auth.views",
@@ -444,7 +510,7 @@
         "kind": 2,
         "importPath": "python-server.auth.views",
         "description": "python-server.auth.views",
-        "peekOfCode": "def login():\n    email = request.json.get('email')\n    user = users.find_one({'email': email})\n    if not user:\n        return jsonify({\"msg\": \"User not found\"}), 404\n    access_token = create_access_token(identity=str(user['_id']))\n    return jsonify(access_token=access_token), 200\n@auth_bp.route('/profile', methods=['GET'])\n@jwt_required()\ndef profile():",
+        "peekOfCode": "def login():\n    email = request.json.get('email')\n    user = users.find_one({'email': email})\n    if not user:\n        return jsonify({\"msg\": \"User not found\"}), 404\n    access_token = create_access_token(identity=str(user['_id']))\n    return jsonify(access_token=access_token), 200\n# route to get profile of authenticated user\n@auth_bp.route('/profile', methods=['GET'])\n@jwt_required()",
         "detail": "python-server.auth.views",
         "documentation": {}
     },
@@ -579,7 +645,7 @@
         "kind": 6,
         "importPath": "python-server.config",
         "description": "python-server.config",
-        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    BASE_URL = os.getenv(\"BASE_URL\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")",
+        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")\n    EMAIL_SENDER = os.getenv(\"EMAIL_SENDER\")\n    EMAIL_PASSWORD = os.getenv(\"EMAIL_PASSWORD\")\n    PUBLIC_LINK = os.getenv(\"PUBLIC_LINK\")",
         "detail": "python-server.config",
         "documentation": {}
     },

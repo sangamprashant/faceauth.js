@@ -2,8 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Social from "../Social";
+import { useAuth } from "../../User/CheckAuth/AuthContext";
+import { Error, Success, Warning } from "../../Result/Tag";
+import axios from "axios";
+import { SERVER } from "../../../config";
 
 const Register = () => {
+  const [fname, setFName] = React.useState("");
+  const [sname, setSName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
+  const { model } = useAuth();
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -49,13 +59,18 @@ const Register = () => {
                   >
                     <h2>OR</h2>
                   </motion.div>
-                  <motion.form variants={itemVariants}>
+                  <motion.form
+                    variants={itemVariants}
+                    onSubmit={handleRegister}
+                  >
                     <div className="formsix-pos my-2">
                       <div className="form-group i-name">
                         <motion.input
                           type="text"
                           className="form-control p-3"
                           id="f-name"
+                          onChange={(e) => setFName(e.target.value)}
+                          value={fname}
                           placeholder="First Name *"
                           variants={itemVariants}
                         />
@@ -67,6 +82,8 @@ const Register = () => {
                           type="text"
                           className="form-control p-3"
                           id="s-name"
+                          value={sname}
+                          onChange={(e) => setSName(e.target.value)}
                           placeholder="Second Name *"
                           variants={itemVariants}
                         />
@@ -77,7 +94,9 @@ const Register = () => {
                         <motion.input
                           type="email"
                           className="form-control p-3"
-                          id="email2"
+                          id="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email Address *"
                           variants={itemVariants}
                         />
@@ -93,7 +112,7 @@ const Register = () => {
                   </motion.form>
                   <motion.div className="login_message" variants={itemVariants}>
                     <p>
-                      Alread haveing an Account?
+                      Already having an Account?
                       <Link to="/log-in" className="text-decoration-none">
                         Sign In
                       </Link>
@@ -107,6 +126,51 @@ const Register = () => {
       </div>
     </motion.section>
   );
+
+  async function handleRegister(e: React.FormEvent) {
+    e.preventDefault();
+    
+  
+    // Check if any of the required fields are empty
+    if (!email.trim() || !fname.trim() || !sname.trim()) {
+      model.setModelState(true);
+      model.setModelData(<Warning text="All fields are required." />);
+      return;
+    }
+  
+    // Construct the request body
+    const reqBody = {
+      sname: sname.trim(),
+      email: email.trim(),
+      fname: fname.trim(),
+    };
+  
+    try {
+      // Send POST request to register user
+      const response = await axios.post(`${SERVER}/auth/register`, reqBody);
+  
+      // Check if registration was successful
+      if (response.data.success) {
+        // Display success message in modal
+        model.setModelState(true);
+        model.setModelData(
+          <Success text="Registration successful. Check your email to verify." />
+        );
+  
+        // Reset form fields
+        setSName("");
+        setFName("");
+        setEmail("");
+      }
+    } catch (error) {
+      // Display error message in modal
+      model.setModelState(true);
+      model.setModelData(
+        <Error text={error?.response?.data?.message || "An error occurred. Please try again later."} />
+      );
+    }
+  }
+  
 };
 
 export default Register;
