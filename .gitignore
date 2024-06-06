@@ -2,3 +2,4 @@
 node_modules
 .facevenv
 dist
+__pycache__
