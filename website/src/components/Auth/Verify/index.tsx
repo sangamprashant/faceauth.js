@@ -1,52 +1,55 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { SERVER } from "../../../config";
 import Result from "../../Result";
+import { Error } from "../../Result/Tag";
+import { useAuth } from "../../User/CheckAuth/AuthContext";
 
 const Verify = () => {
-  const [Status, setStatus] = useState<101 | 102 | 103>(101);
+  const [status, setStatus] = useState<101 | 102 | 103>(101);
+  const { model, token, userData, authenticate } = useAuth();
 
   const tem = window.location.search;
-  const token = tem.replace("?token=", "");
-
-  console.log(token);
+  const LinkToken = tem.replace("?token=", "");
 
   // Function to verify the token
-  const verifyToken = () => {
-    // You can send a request to your backend to verify the token
-    // For example:
-    // fetch(`/api/verify?token=${token}`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     // Handle verification response
-    //     setVerificationStatus('success');
-    //   })
-    //   .catch(error => {
-    //     console.error('Error verifying token:', error);
-    //     // Handle error
-    //     setVerificationStatus('error');
-    //     setVerificationError(error.message || 'An error occurred while verifying the token.');
-    //   });
-
-    // For demonstration purposes, simulate verification
-    // Replace setTimeout with actual API call
-    setTimeout(() => {
-      const success = Math.random() < 0.5; // Simulate 80% success rate
-      if (success) {
+  const verifyToken = async () => {
+    try {
+      const response = await axios.get(`${SERVER}/auth/verify`, {
+        headers: {
+          Authorization: "Bearer " + LinkToken,
+        },
+      });
+      if (response.data.success) {
         setStatus(102);
-      } else {
-        setStatus(103);
-        // setVerificationError("Failed to verify token.");
+        console.log(response.data.token);
+        Cookies.set("accessToken", response.data.token, { expires: 1 });
+        token.setAuthToken(response.data.token);
+        userData.setUser(response.data.user);
+        authenticate.setIsAuthenticated(true);
       }
-    }, 1000); // Simulate 1 second delay
+    } catch (error: any) {
+      setStatus(103);
+      model.setModelState(true);
+      model.setModelData(
+        <Error
+          text={
+            error?.response?.data?.message ||
+            error?.response?.data?.msg ||
+            "Something went wrong, please try later."
+          }
+        />
+      );
+    }
   };
 
-  // Verify the token when the component mounts
   useEffect(() => {
-    if (token) verifyToken();
+    if (LinkToken) verifyToken();
     else setStatus(103);
-  }, [token]);
+  }, [LinkToken]);
 
-  return <Result type={Status} />;
+  return <Result type={status} />;
 };
 
 export default Verify;

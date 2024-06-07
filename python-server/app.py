@@ -24,7 +24,7 @@ def create_app():
 
     # Show message on console when connected
     print("Connected to MongoDB")
-
+    
     return app, jwt, mongo, db, users
 
 app, jwt, mongo, db, users = create_app()

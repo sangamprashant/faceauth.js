@@ -1,5 +1,117 @@
 [
     {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "smtplib",
         "kind": 6,
         "isExtraImport": true,
@@ -57,6 +169,14 @@
         "documentation": {}
     },
     {
+        "label": "jwt",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "MIMEMultipart",
         "importPath": "email.mime.multipart",
         "description": "email.mime.multipart",
@@ -81,110 +201,6 @@
         "documentation": {}
     },
     {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "create_access_token",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -202,6 +218,14 @@
     },
     {
         "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "decode_token",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
         "isExtraImport": true,
@@ -311,6 +335,14 @@
         "description": "auth.sendmail",
         "isExtraImport": true,
         "detail": "auth.sendmail",
+        "documentation": {}
+    },
+    {
+        "label": "VerifyToken",
+        "importPath": "auth.role",
+        "description": "auth.role",
+        "isExtraImport": true,
+        "detail": "auth.role",
         "documentation": {}
     },
     {
@@ -488,6 +520,15 @@
         "documentation": {}
     },
     {
+        "label": "VerifyToken",
+        "kind": 2,
+        "importPath": "python-server.auth.role",
+        "description": "python-server.auth.role",
+        "peekOfCode": "def VerifyToken(token, expected_type):\n    claims = token.get('type')\n    if claims != expected_type:\n        return jsonify({\"message\": \"Invalid token type\", \"success\": False}), 403",
+        "detail": "python-server.auth.role",
+        "documentation": {}
+    },
+    {
         "label": "send_mail",
         "kind": 2,
         "importPath": "python-server.auth.sendmail",
@@ -510,7 +551,16 @@
         "kind": 2,
         "importPath": "python-server.auth.views",
         "description": "python-server.auth.views",
-        "peekOfCode": "def login():\n    email = request.json.get('email')\n    user = users.find_one({'email': email})\n    if not user:\n        return jsonify({\"msg\": \"User not found\"}), 404\n    access_token = create_access_token(identity=str(user['_id']))\n    return jsonify(access_token=access_token), 200\n# route to get profile of authenticated user\n@auth_bp.route('/profile', methods=['GET'])\n@jwt_required()",
+        "peekOfCode": "def login():\n    email = request.json.get('email')\n    user = users.find_one({'email': email})\n    if not user:\n        return jsonify({\"msg\": \"User not found\"}), 404\n    token = create_access_token(identity=str(user['_id']), expires_delta=timedelta(minutes=10), additional_claims={\"type\": \"verification\"})\n    send_mail(email, token)\n    return jsonify({\"success\": True,}), 200\n# verify the user\n@auth_bp.route('/verify', methods=['GET'])",
+        "detail": "python-server.auth.views",
+        "documentation": {}
+    },
+    {
+        "label": "verify_user",
+        "kind": 2,
+        "importPath": "python-server.auth.views",
+        "description": "python-server.auth.views",
+        "peekOfCode": "def verify_user():\n    try:\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"verification\")\n        if response:\n            return response\n        user_id = decoded_token['sub']\n        user = users.find_one({'_id': ObjectId(user_id)})\n        if not user:\n            return jsonify({\"message\": \"User not found\", \"success\": False}), 404",
         "detail": "python-server.auth.views",
         "documentation": {}
     },
@@ -519,7 +569,7 @@
         "kind": 2,
         "importPath": "python-server.auth.views",
         "description": "python-server.auth.views",
-        "peekOfCode": "def profile():\n    try:\n        user_id = get_jwt_identity()\n        user = users.find_one({'_id': ObjectId(user_id)})\n        if not user:\n            return jsonify({\"msg\": \"User not found\"}), 404\n        user_profile = {\n            \"email\": user.get('email'),\n            \"fname\": user.get('fname'),\n            \"sname\": user.get('sname'),",
+        "peekOfCode": "def profile():\n    try:\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        user_id = get_jwt_identity()\n        user = users.find_one({'_id': ObjectId(user_id)})\n        if not user:\n            return jsonify({\"message\": \"User not found\", \"success\": False}), 404",
         "detail": "python-server.auth.views",
         "documentation": {}
     },
@@ -528,7 +578,7 @@
         "kind": 5,
         "importPath": "python-server.auth.views",
         "description": "python-server.auth.views",
-        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n@auth_bp.route('/register', methods=['POST'])\ndef register():\n    try:\n        data = request.json\n        # Validate the request data against the schema\n        registration_schema = RegistrationSchema()\n        registration_schema.validate(data)\n        email = data.get('email')\n        fname = data.get('fname')",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n# register\n# Register\n@auth_bp.route('/register', methods=['POST'])\ndef register():\n    try:\n        data = request.json\n        # Validate the request data against the schema\n        registration_schema = RegistrationSchema()\n        registration_schema.validate(data)",
         "detail": "python-server.auth.views",
         "documentation": {}
     },
@@ -654,7 +704,7 @@
         "kind": 2,
         "importPath": "python-server.main",
         "description": "python-server.main",
-        "peekOfCode": "def index():\n    try:\n        return jsonify({\"message\": \"Connected to server\", \"success\":True}), 200\n    except Exception as e:\n        return jsonify({\"error\": str(e), \"success\":False}), 500\nif __name__ == '__main__':\n    port = int(os.environ.get('PORT', 8000))\n    app.run(debug=True,host='0.0.0.0', port=port)",
+        "peekOfCode": "def index():\n    try:\n        return jsonify({\"message\": \"Connected to server\", \"success\":True}), 200\n    except Exception as e:\n        return jsonify({\"error\": str(e), \"success\":False}), 500\nif __name__ == '__main__':\n    port = int(os.environ.get('PORT', 8000))\n    app.run(debug=True, host='0.0.0.0', port=port)",
         "detail": "python-server.main",
         "documentation": {}
     },

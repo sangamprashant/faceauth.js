@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Result.css";
 import React from "react";
@@ -121,6 +121,7 @@ type VerificationProps = {
 const Verification = (props: VerificationProps) => {
   const { t } = props;
   const [countdown, setCountdown] = React.useState(3);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
@@ -129,16 +130,16 @@ const Verification = (props: VerificationProps) => {
       interval = setInterval(() => {
         setCountdown((prevCount) => prevCount - 1);
       }, 1000);
-
-      // Clear interval after 3 seconds
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         clearInterval(interval);
+        navigate("/profile");
       }, 3000);
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timeout);
+      };
     }
-
-    // Cleanup function to clear interval
-    return () => clearInterval(interval);
-  }, [t]);
+  }, [t, navigate]);
 
   if (t === 1) return <h1>Verifying...</h1>;
   if (t === 2)

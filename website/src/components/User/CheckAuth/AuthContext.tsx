@@ -5,11 +5,15 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { SERVER } from "../../../config";
+import { Error as ErrorComp } from "../../Result/Tag";
 
 type AuthContextType = {
   token: {
     setAuthToken: (token: string) => void;
-    authToken: string;
+    authToken: string | undefined;
   };
   userData: {
     setUser: (user: any) => void;
@@ -37,32 +41,63 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [modelState, setModelState] = React.useState(false);
-  const [modelData, setModelData] = React.useState<React.ReactNode>(null);
-  const [loading, setLoading] = useState(true);
-  const [authToken, setAuthToken] = useState("");
+  const [authToken, setAuthToken] = useState<string | undefined>(
+    Cookies.get("accessToken")
+  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    !!authToken
+  );
+  const [modelState, setModelState] = useState<boolean>(false);
+  const [modelData, setModelData] = useState<React.ReactNode>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+
+    console.log({authToken})
+    if (!user && authToken) {
+      checkAuth();
+    } else setLoading(false)
+  }, [authToken, user]);
+
+  const logout = () => {
+    Cookies.remove("accessToken");
+    setAuthToken(undefined);
+    setUser(null);
+    setIsAuthenticated(false);
+  };
 
   const checkAuth = async () => {
     setLoading(true);
-    // Replace this with your actual authentication check logic
-    setTimeout(() => {
-      const userIsAuthenticated = true; // Replace with actual logic
-      setIsAuthenticated(userIsAuthenticated);
+    try {
+      const response = await axios.get(`${SERVER}/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      if (response.data.success) {
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+      } else {
+        logout();
+      }
+    } catch (error: any) {
+      setModelState(true);
+      setModelData(
+        <ErrorComp
+          text={
+            error?.response?.data?.message ||
+            error?.response?.data?.msg ||
+            "Something went wrong."
+          }
+        />
+      );
+      if (error?.response?.status === 401) {
+        logout();
+      }
+    } finally {
       setLoading(false);
-    }, 2000);
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const logout = () => {
-    // Clear token, user data, and set isAuthenticated to false
-    setAuthToken("");
-    setUser(null);
-    setIsAuthenticated(false);
+    }
   };
 
   return (
@@ -72,8 +107,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         userData: { setUser, user },
         authenticate: { setIsAuthenticated, isAuthenticated },
         model: {
-          modelState,
           setModelState,
+          modelState,
           modelData,
           setModelData,
         },

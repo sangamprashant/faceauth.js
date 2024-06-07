@@ -16,6 +16,10 @@ const Navbar = () => {
     match = window.location.pathname === "/";
   }, [window.location, navigate]);
 
+  React.useEffect(() => {
+    isMobile = window.innerWidth <= 768;
+  }, [window.innerWidth, window]);
+
   const navItemVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },

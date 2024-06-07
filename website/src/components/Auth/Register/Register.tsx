@@ -129,48 +129,42 @@ const Register = () => {
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
-    
-  
-    // Check if any of the required fields are empty
+
     if (!email.trim() || !fname.trim() || !sname.trim()) {
       model.setModelState(true);
       model.setModelData(<Warning text="All fields are required." />);
       return;
     }
-  
-    // Construct the request body
+
     const reqBody = {
       sname: sname.trim(),
       email: email.trim(),
       fname: fname.trim(),
     };
-  
+
     try {
-      // Send POST request to register user
       const response = await axios.post(`${SERVER}/auth/register`, reqBody);
-  
-      // Check if registration was successful
       if (response.data.success) {
-        // Display success message in modal
         model.setModelState(true);
         model.setModelData(
           <Success text="Registration successful. Check your email to verify." />
         );
-  
-        // Reset form fields
         setSName("");
         setFName("");
         setEmail("");
       }
-    } catch (error) {
-      // Display error message in modal
+    } catch (error: any) {
       model.setModelState(true);
       model.setModelData(
-        <Error text={error?.response?.data?.message || "An error occurred. Please try again later."} />
+        <Error
+          text={
+            error?.response?.data?.message ||
+            "An error occurred. Please try again later."
+          }
+        />
       );
     }
   }
-  
 };
 
 export default Register;

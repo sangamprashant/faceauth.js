@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app import app, db
+from app import app, db, jwt
 from auth.views import auth_bp
 from project.views import project_bp
 import os
@@ -16,4 +16,4 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
-    app.run(debug=True,host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
