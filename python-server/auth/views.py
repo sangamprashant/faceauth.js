@@ -8,6 +8,7 @@ from marshmallow import ValidationError
 from bson import ObjectId
 from auth.sendmail import send_mail
 from auth.role import VerifyToken
+from routes.history import add_history_action
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -79,6 +80,7 @@ def verify_user():
             return jsonify({"message": "User not found", "success": False}), 404
 
         new_token = create_access_token(identity=user_id, expires_delta=timedelta(hours=2), additional_claims={"type": "access"})
+        add_history_action(user_id,"Logged in")
         return jsonify({"token": new_token, "message": "User verified successfully", "success": True}), 200
 
     except Exception as e:

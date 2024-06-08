@@ -12,3 +12,4 @@ class Config:
     EMAIL_SENDER = os.getenv("EMAIL_SENDER")
     EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
     PUBLIC_LINK = os.getenv("PUBLIC_LINK")
+    MONGODB_HISTORY = os.getenv("MONGODB_HISTORY")

@@ -80,14 +80,6 @@
         "documentation": {}
     },
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -97,6 +89,22 @@
     },
     {
         "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -153,6 +161,22 @@
         "documentation": {}
     },
     {
+        "label": "users",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "importPath": "app",
         "description": "app",
@@ -161,15 +185,7 @@
         "documentation": {}
     },
     {
-        "label": "db",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "jwt",
+        "label": "app",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -257,6 +273,30 @@
         "documentation": {}
     },
     {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "decode_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
         "label": "JWTManager",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -275,6 +315,22 @@
     },
     {
         "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -330,6 +386,14 @@
         "documentation": {}
     },
     {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
         "label": "send_mail",
         "importPath": "auth.sendmail",
         "description": "auth.sendmail",
@@ -343,6 +407,30 @@
         "description": "auth.role",
         "isExtraImport": true,
         "detail": "auth.role",
+        "documentation": {}
+    },
+    {
+        "label": "VerifyToken",
+        "importPath": "auth.role",
+        "description": "auth.role",
+        "isExtraImport": true,
+        "detail": "auth.role",
+        "documentation": {}
+    },
+    {
+        "label": "add_history_action",
+        "importPath": "routes.history",
+        "description": "routes.history",
+        "isExtraImport": true,
+        "detail": "routes.history",
+        "documentation": {}
+    },
+    {
+        "label": "history_bp",
+        "importPath": "routes.history",
+        "description": "routes.history",
+        "isExtraImport": true,
+        "detail": "routes.history",
         "documentation": {}
     },
     {
@@ -434,14 +522,6 @@
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
-        "documentation": {}
-    },
-    {
-        "label": "load_dotenv",
-        "importPath": "dotenv",
-        "description": "dotenv",
-        "isExtraImport": true,
-        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -673,6 +753,33 @@
         "documentation": {}
     },
     {
+        "label": "add_history_action",
+        "kind": 2,
+        "importPath": "python-server.routes.history",
+        "description": "python-server.routes.history",
+        "peekOfCode": "def add_history_action(user_id, action):\n    timestamp = datetime.now(timezone.utc).isoformat()\n    history_entry = {\"action\": action, \"timestamp\": timestamp}\n    history.update_one(\n        {'user_id': ObjectId(user_id)},\n        {'$push': {'actions': history_entry}},\n        upsert=True\n    )\n@history_bp.route('/retrieve', methods=['GET'])\n@jwt_required()",
+        "detail": "python-server.routes.history",
+        "documentation": {}
+    },
+    {
+        "label": "history_retrieve",
+        "kind": 2,
+        "importPath": "python-server.routes.history",
+        "description": "python-server.routes.history",
+        "peekOfCode": "def history_retrieve():\n    try:\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        user_id = get_jwt_identity()\n        user = users.find_one({'_id': ObjectId(user_id)})\n        if not user:\n            return jsonify({\"message\": \"User not found\", \"success\": False}), 404",
+        "detail": "python-server.routes.history",
+        "documentation": {}
+    },
+    {
+        "label": "history_bp",
+        "kind": 5,
+        "importPath": "python-server.routes.history",
+        "description": "python-server.routes.history",
+        "peekOfCode": "history_bp = Blueprint('history', __name__)\n# Function to add a new action to a user's history\ndef add_history_action(user_id, action):\n    timestamp = datetime.now(timezone.utc).isoformat()\n    history_entry = {\"action\": action, \"timestamp\": timestamp}\n    history.update_one(\n        {'user_id': ObjectId(user_id)},\n        {'$push': {'actions': history_entry}},\n        upsert=True\n    )",
+        "detail": "python-server.routes.history",
+        "documentation": {}
+    },
+    {
         "label": "RegistrationSchema",
         "kind": 6,
         "importPath": "python-server.schema.user",
@@ -686,7 +793,7 @@
         "kind": 2,
         "importPath": "python-server.app",
         "description": "python-server.app",
-        "peekOfCode": "def create_app():\n    app = Flask(__name__)\n    app.config.from_object(Config)\n    CORS(app)\n    jwt = JWTManager(app)\n    mongo = PyMongo(app)\n    # Connect to MongoDB using pymongo\n    client = MongoClient(app.config['MONGO_URI'], connect=True)\n    db = client[app.config['MONGODB_DATABASE']]\n    # Define the user table here",
+        "peekOfCode": "def create_app():\n    app = Flask(__name__)\n    app.config.from_object(Config)\n    CORS(app)\n    jwt = JWTManager(app)\n    mongo = PyMongo(app)\n    # Connect to MongoDB using py-mongo\n    client = MongoClient(app.config['MONGO_URI'], connect=True)\n    db = client[app.config['MONGODB_DATABASE']]\n    # Define the user table here",
         "detail": "python-server.app",
         "documentation": {}
     },
@@ -695,7 +802,7 @@
         "kind": 6,
         "importPath": "python-server.config",
         "description": "python-server.config",
-        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")\n    EMAIL_SENDER = os.getenv(\"EMAIL_SENDER\")\n    EMAIL_PASSWORD = os.getenv(\"EMAIL_PASSWORD\")\n    PUBLIC_LINK = os.getenv(\"PUBLIC_LINK\")",
+        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")\n    EMAIL_SENDER = os.getenv(\"EMAIL_SENDER\")\n    EMAIL_PASSWORD = os.getenv(\"EMAIL_PASSWORD\")\n    PUBLIC_LINK = os.getenv(\"PUBLIC_LINK\")\n    MONGODB_HISTORY = os.getenv(\"MONGODB_HISTORY\")",
         "detail": "python-server.config",
         "documentation": {}
     },

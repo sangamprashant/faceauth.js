@@ -4,9 +4,9 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from config import Config
 from pymongo import MongoClient
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 def create_app():
     app = Flask(__name__)
@@ -15,16 +15,17 @@ def create_app():
     jwt = JWTManager(app)
     mongo = PyMongo(app)
 
-    # Connect to MongoDB using pymongo
+    # Connect to MongoDB using py-mongo
     client = MongoClient(app.config['MONGO_URI'], connect=True)
     db = client[app.config['MONGODB_DATABASE']]
 
     # Define the user table here
     users = db[app.config["MONGODB_USER"]]
+    history = db[app.config["MONGODB_HISTORY"]]
 
     # Show message on console when connected
     print("Connected to MongoDB")
     
-    return app, jwt, mongo, db, users
+    return app, jwt, mongo, db, users, history
 
-app, jwt, mongo, db, users = create_app()
+app, jwt, mongo, db, users, history = create_app()
