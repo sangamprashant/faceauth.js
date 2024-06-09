@@ -1,13 +1,16 @@
 from flask import jsonify
 from app import app
 from auth.views import auth_bp
-from project.views import project_bp
+from routes.project import project_bp
 from routes.history import history_bp
+from routes.notification import notifications_bp
 import os
 
+# Register blueprints
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(project_bp, url_prefix='/api/project')
 app.register_blueprint(history_bp, url_prefix='/api/history')
+app.register_blueprint(notifications_bp, url_prefix='/api/notification')
 
 @app.route("/")
 def index():

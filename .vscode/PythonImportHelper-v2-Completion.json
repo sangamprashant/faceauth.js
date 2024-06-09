@@ -104,6 +104,30 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Flask",
         "importPath": "flask",
         "description": "flask",
@@ -153,14 +177,6 @@
         "documentation": {}
     },
     {
-        "label": "mongo",
-        "importPath": "app",
-        "description": "app",
-        "isExtraImport": true,
-        "detail": "app",
-        "documentation": {}
-    },
-    {
         "label": "users",
         "importPath": "app",
         "description": "app",
@@ -178,6 +194,38 @@
     },
     {
         "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "notifications",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "project",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -273,6 +321,38 @@
         "documentation": {}
     },
     {
+        "label": "decode_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "get_jwt_identity",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "decode_token",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
         "label": "jwt_required",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -315,6 +395,22 @@
     },
     {
         "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -394,6 +490,14 @@
         "documentation": {}
     },
     {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
         "label": "send_mail",
         "importPath": "auth.sendmail",
         "description": "auth.sendmail",
@@ -415,6 +519,30 @@
         "description": "auth.role",
         "isExtraImport": true,
         "detail": "auth.role",
+        "documentation": {}
+    },
+    {
+        "label": "VerifyToken",
+        "importPath": "auth.role",
+        "description": "auth.role",
+        "isExtraImport": true,
+        "detail": "auth.role",
+        "documentation": {}
+    },
+    {
+        "label": "VerifyToken",
+        "importPath": "auth.role",
+        "description": "auth.role",
+        "isExtraImport": true,
+        "detail": "auth.role",
+        "documentation": {}
+    },
+    {
+        "label": "add_history_action",
+        "importPath": "routes.history",
+        "description": "routes.history",
+        "isExtraImport": true,
+        "detail": "routes.history",
         "documentation": {}
     },
     {
@@ -559,6 +687,22 @@
         "documentation": {}
     },
     {
+        "label": "add_notification_action",
+        "importPath": "routes.notification",
+        "description": "routes.notification",
+        "isExtraImport": true,
+        "detail": "routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "notifications_bp",
+        "importPath": "routes.notification",
+        "description": "routes.notification",
+        "isExtraImport": true,
+        "detail": "routes.notification",
+        "documentation": {}
+    },
+    {
         "label": "auth_bp",
         "importPath": "auth.views",
         "description": "auth.views",
@@ -568,10 +712,10 @@
     },
     {
         "label": "project_bp",
-        "importPath": "project.views",
-        "description": "project.views",
+        "importPath": "routes.project",
+        "description": "routes.project",
         "isExtraImport": true,
-        "detail": "project.views",
+        "detail": "routes.project",
         "documentation": {}
     },
     {
@@ -726,33 +870,6 @@
         "documentation": {}
     },
     {
-        "label": "create_project",
-        "kind": 2,
-        "importPath": "python-server.project.views",
-        "description": "python-server.project.views",
-        "peekOfCode": "def create_project():\n    user_id = get_jwt_identity()\n    project_name = request.json.get('project_name')\n    project_id = str(uuid.uuid4())\n    project = {\n        'project_id': project_id,\n        'project_name': project_name,\n        'user_id': user_id\n    }\n    mongo.db.projects.insert_one(project)",
-        "detail": "python-server.project.views",
-        "documentation": {}
-    },
-    {
-        "label": "list_projects",
-        "kind": 2,
-        "importPath": "python-server.project.views",
-        "description": "python-server.project.views",
-        "peekOfCode": "def list_projects():\n    user_id = get_jwt_identity()\n    projects = list(mongo.db.projects.find({'user_id': user_id}))\n    for project in projects:\n        project['_id'] = str(project['_id'])\n    return jsonify(projects), 200",
-        "detail": "python-server.project.views",
-        "documentation": {}
-    },
-    {
-        "label": "project_bp",
-        "kind": 5,
-        "importPath": "python-server.project.views",
-        "description": "python-server.project.views",
-        "peekOfCode": "project_bp = Blueprint('project', __name__)\n@project_bp.route('/create', methods=['POST'])\n@jwt_required()\ndef create_project():\n    user_id = get_jwt_identity()\n    project_name = request.json.get('project_name')\n    project_id = str(uuid.uuid4())\n    project = {\n        'project_id': project_id,\n        'project_name': project_name,",
-        "detail": "python-server.project.views",
-        "documentation": {}
-    },
-    {
         "label": "add_history_action",
         "kind": 2,
         "importPath": "python-server.routes.history",
@@ -780,6 +897,69 @@
         "documentation": {}
     },
     {
+        "label": "add_notification_action",
+        "kind": 2,
+        "importPath": "python-server.routes.notification",
+        "description": "python-server.routes.notification",
+        "peekOfCode": "def add_notification_action(user_id, action):\n    try:\n        notification_entry = {\"_id\": str(ObjectId()), \"action\": action, \"seen\": False}\n        notifications.update_one(\n            {'user_id': str(user_id)},  # Ensuring user_id is a string\n            {'$push': {'actions': notification_entry}},\n            upsert=True\n        )\n    except Exception as e:\n        app.logger.error(f\"Error adding notification action: {str(e)}\")",
+        "detail": "python-server.routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "notifications_retrieve",
+        "kind": 2,
+        "importPath": "python-server.routes.notification",
+        "description": "python-server.routes.notification",
+        "peekOfCode": "def notifications_retrieve():\n    try:\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        user_id = get_jwt_identity()\n        user = users.find_one({'_id': ObjectId(user_id)})\n        if not user:\n            return jsonify({\"message\": \"User not found\", \"success\": False}), 404",
+        "detail": "python-server.routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "mark_as_seen",
+        "kind": 2,
+        "importPath": "python-server.routes.notification",
+        "description": "python-server.routes.notification",
+        "peekOfCode": "def mark_as_seen():\n    try:\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        user_id = get_jwt_identity()\n        notification_id = request.json.get('notification_id')\n        if not notification_id:\n            return jsonify({\"message\": \"Notification ID is required\", \"success\": False}), 400",
+        "detail": "python-server.routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "notifications_bp",
+        "kind": 5,
+        "importPath": "python-server.routes.notification",
+        "description": "python-server.routes.notification",
+        "peekOfCode": "notifications_bp = Blueprint('notifications', __name__)\n# Function to add a new action to a user's notifications\ndef add_notification_action(user_id, action):\n    try:\n        notification_entry = {\"_id\": str(ObjectId()), \"action\": action, \"seen\": False}\n        notifications.update_one(\n            {'user_id': str(user_id)},  # Ensuring user_id is a string\n            {'$push': {'actions': notification_entry}},\n            upsert=True\n        )",
+        "detail": "python-server.routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "create_project",
+        "kind": 2,
+        "importPath": "python-server.routes.project",
+        "description": "python-server.routes.project",
+        "peekOfCode": "def create_project():\n    decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n    response = VerifyToken(decoded_token, \"access\")\n    if response:\n        return response\n    user_id = get_jwt_identity()\n    project_name = request.json.get('p_name')\n    project_description = request.json.get('p_description')\n    project_active = request.json.get('p_active')\n    project_image  = request.json.get(\"p_image\")",
+        "detail": "python-server.routes.project",
+        "documentation": {}
+    },
+    {
+        "label": "list_projects",
+        "kind": 2,
+        "importPath": "python-server.routes.project",
+        "description": "python-server.routes.project",
+        "peekOfCode": "def list_projects():\n    decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n    response = VerifyToken(decoded_token, \"access\")\n    if response:\n        return response\n    user_id = get_jwt_identity()\n    projects = list(project.find({'user_id': user_id}))\n    for p in projects:\n        p['_id'] = str(p['_id'])\n    return jsonify(projects), 200",
+        "detail": "python-server.routes.project",
+        "documentation": {}
+    },
+    {
+        "label": "project_bp",
+        "kind": 5,
+        "importPath": "python-server.routes.project",
+        "description": "python-server.routes.project",
+        "peekOfCode": "project_bp = Blueprint('project', __name__)\n@project_bp.route('/create', methods=['POST'])\n@jwt_required()\ndef create_project():\n    decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n    response = VerifyToken(decoded_token, \"access\")\n    if response:\n        return response\n    user_id = get_jwt_identity()\n    project_name = request.json.get('p_name')",
+        "detail": "python-server.routes.project",
+        "documentation": {}
+    },
+    {
         "label": "RegistrationSchema",
         "kind": 6,
         "importPath": "python-server.schema.user",
@@ -802,7 +982,7 @@
         "kind": 6,
         "importPath": "python-server.config",
         "description": "python-server.config",
-        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")\n    EMAIL_SENDER = os.getenv(\"EMAIL_SENDER\")\n    EMAIL_PASSWORD = os.getenv(\"EMAIL_PASSWORD\")\n    PUBLIC_LINK = os.getenv(\"PUBLIC_LINK\")\n    MONGODB_HISTORY = os.getenv(\"MONGODB_HISTORY\")",
+        "peekOfCode": "class Config:\n    MONGO_URI = os.getenv(\"MONGODB_URI\")\n    JWT_SECRET_KEY = os.getenv(\"JWT_SECRET_KEY\")\n    MONGODB_DATABASE = os.getenv(\"MONGODB_DATABASE\")\n    MONGODB_USER = os.getenv(\"MONGODB_USER\")\n    EMAIL_SENDER = os.getenv(\"EMAIL_SENDER\")\n    EMAIL_PASSWORD = os.getenv(\"EMAIL_PASSWORD\")\n    PUBLIC_LINK = os.getenv(\"PUBLIC_LINK\")\n    MONGODB_HISTORY = os.getenv(\"MONGODB_HISTORY\")\n    MONGODB_PROJECT = os.getenv(\"MONGODB_PROJECT\")",
         "detail": "python-server.config",
         "documentation": {}
     },

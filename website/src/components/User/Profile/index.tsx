@@ -17,7 +17,7 @@ const Profile = () => {
   const renderComponent = () => {
     if (activeTab === "home") return <Home />;
     else if (activeTab === "Projects") return <Projects />;
-    else if (activeTab === "API") return <Api apiKey="sample" />;
+    else if (activeTab === "API") return <Api apiKey={userData?.user?.api_key} />;
     else if (activeTab === "Notifications") return <NotificationsPage />;
     else if (activeTab === "History") return <History />;
   };

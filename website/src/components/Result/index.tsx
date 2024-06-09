@@ -59,7 +59,7 @@ const Result = (props: Props) => {
   else if (type === 404)
     return (
       <ComponentResult
-        image="assets/images/Result/404.jpg"
+        image="./assets/images/Result/404.jpg"
         extra={<Path path="/" label="Go Back To Home" />}
       />
     );

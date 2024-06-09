@@ -4,6 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import { SERVER } from "../../../config";
 import { useAuth } from "../CheckAuth/AuthContext";
 import { Error } from "../../Result/Tag";
+import LoadingComponent from "../../Reuse/Loading";
 
 type HistoryItem = {
   action: string;
@@ -15,6 +16,7 @@ type HistoryProps = HistoryItem[];
 const History = () => {
   const { token, model } = useAuth();
   const [history, setHistory] = React.useState<HistoryProps>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useLayoutEffect(() => {
     fetchHistory();
@@ -23,20 +25,28 @@ const History = () => {
   return (
     <div>
       <ListGroup className="mt-2">
-        {history?.map((item) => (
-          <ListGroup.Item
-            key={item.timestamp.toString()}
-            className="history-item"
-          >
-            <strong>Action:</strong> {item.action} <br />
-            <strong>Timestamp:</strong> {item.timestamp.toString()}
-          </ListGroup.Item>
-        ))}
+        {loading ? (
+          <LoadingComponent />
+        ) : (
+          <React.Fragment>
+            {history?.map((item) => (
+              <ListGroup.Item
+                key={item.timestamp.toString()}
+                className="history-item"
+              >
+                <strong>Action:</strong> {item.action} <br />
+                <strong>Timestamp:</strong>{" "}
+                {new Date(item.timestamp).toLocaleString()}
+              </ListGroup.Item>
+            ))}
+          </React.Fragment>
+        )}
       </ListGroup>
     </div>
   );
 
   async function fetchHistory() {
+    setLoading(true);
     try {
       const response = await axios.get(`${SERVER}/history/retrieve`, {
         headers: {
@@ -55,6 +65,8 @@ const History = () => {
           }
         />
       );
+    } finally {
+      setLoading(false);
     }
   }
 };

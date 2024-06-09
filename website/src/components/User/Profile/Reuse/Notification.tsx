@@ -1,10 +1,11 @@
+// Notification.tsx
 import React from "react";
 import { Badge, Button } from "react-bootstrap";
 
 type NotificationProps = {
   text: string;
   seen: boolean;
-  onMarkAsSeen: () => void;
+  onMarkAsSeen?: () => void; // Change _id to id
 };
 
 const Notification: React.FC<NotificationProps> = ({
@@ -26,7 +27,7 @@ const Notification: React.FC<NotificationProps> = ({
         <span style={{ marginLeft: "10px" }}>{text}</span>
       </div>
       {!seen && (
-        <Button variant="success" size="sm" onClick={onMarkAsSeen}>
+        <Button variant="success" size="sm" onClick={() => onMarkAsSeen?.()}>
           Mark as Seen
         </Button>
       )}

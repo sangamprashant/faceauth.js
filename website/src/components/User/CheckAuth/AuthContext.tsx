@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { SERVER } from "../../../config";
 import { Error as ErrorComp } from "../../Result/Tag";
+import { notification } from "antd";
 
 type AuthContextType = {
   token: {
@@ -32,6 +33,7 @@ type AuthContextType = {
   loading: boolean;
   checkAuth: () => void;
   logout: () => void;
+  handleNotification: (message: string, description: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -44,20 +46,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authToken, setAuthToken] = useState<string | undefined>(
     Cookies.get("accessToken")
   );
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    !!authToken
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!authToken);
   const [modelState, setModelState] = useState<boolean>(false);
   const [modelData, setModelData] = useState<React.ReactNode>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<any>(null);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-
-    console.log({authToken})
     if (!user && authToken) {
       checkAuth();
-    } else setLoading(false)
+    } else setLoading(false);
   }, [authToken, user]);
 
   const logout = () => {
@@ -115,11 +114,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         loading,
         checkAuth,
         logout,
+        handleNotification,
       }}
     >
+      {contextHolder}
       {children}
     </AuthContext.Provider>
   );
+  function handleNotification(message: string, description: string) {
+    const audio = new Audio("./assets/audio/notify.mp3");
+    audio.play().catch((error) => {
+      console.error("Error playing sound:", error);
+    });
+    api.info({
+      message,
+      description,
+      placement: "bottomRight",
+    });
+  }
 };
 
 export const useAuth = () => {
