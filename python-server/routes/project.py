@@ -4,6 +4,7 @@ from app import project
 from auth.role import VerifyToken
 from routes.history import add_history_action
 from routes.notification import add_notification_action
+from bson import ObjectId
 import uuid
 
 project_bp = Blueprint('project', __name__)
@@ -53,3 +54,60 @@ def list_projects():
     for p in projects:
         p['_id'] = str(p['_id'])
     return jsonify(projects), 200
+
+@project_bp.route('/get/<project_id>', methods=['GET'])
+@jwt_required()
+def get_project(project_id):
+    try:
+        # Decode JWT token and verify access
+        decoded_token = decode_token(request.headers.get('Authorization').split()[1])
+        response = VerifyToken(decoded_token, "access")
+        if response:
+            return response
+        
+        # Get user ID from token
+        user_id = get_jwt_identity()
+        
+        # Check if the project exists and belongs to the user
+        project_data = project.find_one({'_id': ObjectId(project_id), 'user_id': user_id})
+        if not project_data:
+            return jsonify({"message": "Project not found or unauthorized"}), 404
+        
+        # Convert ObjectId to string for JSON serialization
+        project_data['_id'] = str(project_data['_id'])
+
+        print(project_data)
+        
+        return jsonify(project_data), 200
+    except Exception as e:
+        return jsonify({"error": str(e), "message": "Internal server error"}), 500
+    
+@project_bp.route('/toggle_active/<project_id>', methods=['GET'])
+@jwt_required()
+def toggle_project_active(project_id):
+    try:
+        # Decode JWT token and verify access
+        decoded_token = decode_token(request.headers.get('Authorization').split()[1])
+        response = VerifyToken(decoded_token, "access")
+        if response:
+            return response
+        
+        # Get user ID from token
+        user_id = get_jwt_identity()
+        
+        # Check if the project exists and belongs to the user
+        project_data = project.find_one({'_id': ObjectId(project_id), 'user_id': user_id})
+        if not project_data:
+            return jsonify({"message": "Project not found or unauthorized"}), 404
+        
+        # Toggle the active status
+        new_status = not project_data['project_active']
+        project.update_one({'_id': ObjectId(project_id)}, {'$set': {'project_active': new_status}})
+        
+        # Add history and notification
+        add_history_action(user_id, f"Project {project_data['project_name']} status toggled to {'active' if new_status else 'inactive'}")
+        add_notification_action(user_id, f"Project {project_data['project_name']} status has been toggled to {'active' if new_status else 'inactive'}")
+        
+        return jsonify({"message": "Project status updated successfully", "new_status": new_status}), 200
+    except Exception as e:
+        return jsonify({"error": str(e), "message": "Internal server error"}), 500

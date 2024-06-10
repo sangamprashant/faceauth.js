@@ -128,6 +128,30 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Flask",
         "importPath": "flask",
         "description": "flask",
@@ -170,6 +194,22 @@
     },
     {
         "label": "app",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "importPath": "app",
+        "description": "app",
+        "isExtraImport": true,
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "project",
         "importPath": "app",
         "description": "app",
         "isExtraImport": true,
@@ -498,6 +538,22 @@
         "documentation": {}
     },
     {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
         "label": "send_mail",
         "importPath": "auth.sendmail",
         "description": "auth.sendmail",
@@ -687,6 +743,15 @@
         "documentation": {}
     },
     {
+        "label": "bcrypt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
+        "documentation": {}
+    },
+    {
         "label": "add_notification_action",
         "importPath": "routes.notification",
         "description": "routes.notification",
@@ -716,6 +781,14 @@
         "description": "routes.project",
         "isExtraImport": true,
         "detail": "routes.project",
+        "documentation": {}
+    },
+    {
+        "label": "api_bp",
+        "importPath": "routes.API",
+        "description": "routes.API",
+        "isExtraImport": true,
+        "detail": "routes.API",
         "documentation": {}
     },
     {
@@ -802,7 +875,7 @@
         "kind": 5,
         "importPath": "python-server.auth.views",
         "description": "python-server.auth.views",
-        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n# register\n# Register\n@auth_bp.route('/register', methods=['POST'])\ndef register():\n    try:\n        data = request.json\n        # Validate the request data against the schema\n        registration_schema = RegistrationSchema()\n        registration_schema.validate(data)",
+        "peekOfCode": "auth_bp = Blueprint('auth', __name__)\n# Register\n@auth_bp.route('/register', methods=['POST'])\ndef register():\n    try:\n        data = request.json\n        # Validate the request data against the schema\n        registration_schema = RegistrationSchema()\n        registration_schema.validate(data)\n        email = data.get('email')",
         "detail": "python-server.auth.views",
         "documentation": {}
     },
@@ -867,6 +940,51 @@
         "description": "python-server.face.views",
         "peekOfCode": "face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\ndef detect_face(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef encode_face(image):\n    # Encode the face using any suitable face recognition library\n    # You can use deep learning-based libraries like dlib, OpenCV's face recognition module, or others\n    # For simplicity, let's just resize the face region to a fixed size and flatten it\n    face_resized = cv2.resize(image, (100, 100))",
         "detail": "python-server.face.views",
+        "documentation": {}
+    },
+    {
+        "label": "detect_face",
+        "kind": 2,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "def detect_face(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef encode_face(image):\n    face_resized = cv2.resize(image, (100, 100))\n    encoding = face_resized.flatten().tolist()  # convert numpy array to list\n    return encoding\napi_bp = Blueprint('api', __name__)\n@api_bp.route(\"/authorization\", methods=['POST'])",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "encode_face",
+        "kind": 2,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "def encode_face(image):\n    face_resized = cv2.resize(image, (100, 100))\n    encoding = face_resized.flatten().tolist()  # convert numpy array to list\n    return encoding\napi_bp = Blueprint('api', __name__)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract the Authorization header\n        authorization_header = request.headers.get('Authorization')",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "get_user_by_api_key",
+        "kind": 2,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "def get_user_by_api_key():\n    try:\n        # Extract the Authorization header\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        pin = request.form.get('pin', None)\n        payload = request.form.get('payload', '{}')\n        face_image = request.files.get('face_image')\n        # Check if the Authorization header is provided\n        if not authorization_header:",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "face_cascade",
+        "kind": 5,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\ndef detect_face(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef encode_face(image):\n    face_resized = cv2.resize(image, (100, 100))\n    encoding = face_resized.flatten().tolist()  # convert numpy array to list\n    return encoding\napi_bp = Blueprint('api', __name__)",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "api_bp",
+        "kind": 5,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "api_bp = Blueprint('api', __name__)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract the Authorization header\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        pin = request.form.get('pin', None)\n        payload = request.form.get('payload', '{}')\n        face_image = request.files.get('face_image')",
+        "detail": "python-server.routes.API",
         "documentation": {}
     },
     {
@@ -947,6 +1065,24 @@
         "importPath": "python-server.routes.project",
         "description": "python-server.routes.project",
         "peekOfCode": "def list_projects():\n    decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n    response = VerifyToken(decoded_token, \"access\")\n    if response:\n        return response\n    user_id = get_jwt_identity()\n    projects = list(project.find({'user_id': user_id}))\n    for p in projects:\n        p['_id'] = str(p['_id'])\n    return jsonify(projects), 200",
+        "detail": "python-server.routes.project",
+        "documentation": {}
+    },
+    {
+        "label": "get_project",
+        "kind": 2,
+        "importPath": "python-server.routes.project",
+        "description": "python-server.routes.project",
+        "peekOfCode": "def get_project(project_id):\n    try:\n        # Decode JWT token and verify access\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        # Get user ID from token\n        user_id = get_jwt_identity()\n        # Check if the project exists and belongs to the user",
+        "detail": "python-server.routes.project",
+        "documentation": {}
+    },
+    {
+        "label": "toggle_project_active",
+        "kind": 2,
+        "importPath": "python-server.routes.project",
+        "description": "python-server.routes.project",
+        "peekOfCode": "def toggle_project_active(project_id):\n    try:\n        # Decode JWT token and verify access\n        decoded_token = decode_token(request.headers.get('Authorization').split()[1])\n        response = VerifyToken(decoded_token, \"access\")\n        if response:\n            return response\n        # Get user ID from token\n        user_id = get_jwt_identity()\n        # Check if the project exists and belongs to the user",
         "detail": "python-server.routes.project",
         "documentation": {}
     },

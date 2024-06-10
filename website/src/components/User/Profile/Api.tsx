@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { Clipboard } from "react-bootstrap-icons";
 import axios from "axios";
+import { useAuth } from "../CheckAuth/AuthContext";
 
 type Props = {
   apiKey: string;
@@ -18,8 +19,8 @@ type Props = {
 };
 
 const Api: React.FC<Props> = ({ apiKey, onApiKeyChange }) => {
+  const { handleNotification } = useAuth();
   const [showApiKey, setShowApiKey] = useState(false);
-  const [copySuccess, setCopySuccess] = useState<string>("");
   const [apiMessage, setApiMessage] = useState<string>("");
 
   const toggleApiKeyVisibility = () => {
@@ -27,16 +28,10 @@ const Api: React.FC<Props> = ({ apiKey, onApiKeyChange }) => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(apiKey).then(
-      () => {
-        setCopySuccess("API key copied to clipboard!");
-        setTimeout(() => setCopySuccess(""), 3000);
-      },
-      () => {
-        setCopySuccess("Failed to copy API key.");
-        setTimeout(() => setCopySuccess(""), 3000);
-      }
-    );
+    if (apiKey) {
+      navigator.clipboard.writeText(apiKey);
+      handleNotification("Copied", "API key copied to clipboard!");
+    }
   };
 
   const createApiKey = async () => {
@@ -92,11 +87,6 @@ const Api: React.FC<Props> = ({ apiKey, onApiKeyChange }) => {
                   <Clipboard /> Copy
                 </Button>
               </InputGroup>
-              {copySuccess && (
-                <Alert variant="success" className="mt-2">
-                  {copySuccess}
-                </Alert>
-              )}
             </Col>
           </Row>
           <Row>

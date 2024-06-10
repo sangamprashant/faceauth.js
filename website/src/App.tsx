@@ -14,7 +14,7 @@ import {
   Tutorial,
 } from "./components";
 import { Login, Register, Verify } from "./components/Auth";
-import { Profile } from "./components/User";
+import { Profile, ProjectOpen } from "./components/User";
 import { AuthProvider } from "./components/User/CheckAuth/AuthContext";
 import { SERVER } from "./config";
 
@@ -39,6 +39,7 @@ function App() {
             <Route path="/verify" element={<Verify />} />
             {/* Protected */}
             <Route path="/profile" element={<Profile />} />
+            <Route path="/project" element={<ProjectOpen />} />
 
             <Route path="*" element={<Result type={404} />} />
           </Routes>

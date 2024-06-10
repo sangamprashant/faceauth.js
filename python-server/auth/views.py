@@ -12,7 +12,6 @@ from routes.history import add_history_action
 
 auth_bp = Blueprint('auth', __name__)
 
-# register
 # Register
 @auth_bp.route('/register', methods=['POST'])
 def register():
@@ -32,7 +31,7 @@ def register():
             return jsonify({"message": "User with this email already exists", "success": False}), 409
 
         # Generate API key
-        api_key = str(uuid.uuid4())
+        api_key = str(uuid.uuid4()) + "-" + str(uuid.uuid4())
 
         # Create a new user record
         new_user = {
