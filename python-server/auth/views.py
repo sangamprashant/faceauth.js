@@ -38,6 +38,11 @@ def register():
             'email': email,
             'sname': sname,
             'fname': fname,
+            'payment_info': {
+                'paid': False,
+                'payment_valid_until': None,
+                'payment_done_date': None
+            },
             'api_key': api_key,
             'projects': []
         }

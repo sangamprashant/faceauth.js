@@ -52,6 +52,7 @@ def list_projects():
     user_id = get_jwt_identity()
     projects = list(project.find({'user_id': user_id}))
     for p in projects:
+        p.pop('users', None)
         p['_id'] = str(p['_id'])
     return jsonify(projects), 200
 
@@ -75,6 +76,16 @@ def get_project(project_id):
         
         # Convert ObjectId to string for JSON serialization
         project_data['_id'] = str(project_data['_id'])
+        
+        # Remove user_id from project_data
+        project_data.pop('user_id', None)
+
+        # Remove face_encoding and payload from project_data.users
+        if 'users' in project_data:
+            for user in project_data['users']:
+                user.pop('face_encoding', None)
+                user.pop('payload', None)
+                user.pop('pin', None)
 
         print(project_data)
         

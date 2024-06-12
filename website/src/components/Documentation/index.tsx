@@ -3,22 +3,19 @@ import axios from "axios";
 
 const FaceAuthForm: React.FC = () => {
   const [pin, setPin] = useState<string>("123456");
-  const [image, setImage] = useState<File | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>(null);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
+      const selectedImages = Array.from(e.target.files);
+      setImages(selectedImages);
     }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!image) {
-      setError("Image is required");
-      return;
-    }
 
     const payload = {
       name: "Prashant",
@@ -29,11 +26,16 @@ const FaceAuthForm: React.FC = () => {
     const formData = new FormData();
     formData.append("pin", pin);
     formData.append("payload", JSON.stringify(payload)); // Serialize payload to JSON string
-    formData.append("face_image", image);
+
+    // Append the list of images to the formData
+    images.forEach((image) => {
+      formData.append(`face_images`, image);
+    });
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/face-auth/authorization",
+        // "http://127.0.0.1:8000/api/face-auth/authorization",
+        "http://127.0.0.1:8000/api/face-auth/login",
         formData,
         {
           headers: {
@@ -67,8 +69,13 @@ const FaceAuthForm: React.FC = () => {
           />
         </div>
         <div>
-          <label>Face Image:</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <label>Face Images:</label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageChange}
+          />
         </div>
         <button type="submit">Submit</button>
       </form>
