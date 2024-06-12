@@ -337,14 +337,6 @@
         "documentation": {}
     },
     {
-        "label": "JWTManager",
-        "importPath": "flask_jwt_extended",
-        "description": "flask_jwt_extended",
-        "isExtraImport": true,
-        "detail": "flask_jwt_extended",
-        "documentation": {}
-    },
-    {
         "label": "jwt_required",
         "importPath": "flask_jwt_extended",
         "description": "flask_jwt_extended",
@@ -618,54 +610,6 @@
         "documentation": {}
     },
     {
-        "label": "PyMongo",
-        "importPath": "flask_pymongo",
-        "description": "flask_pymongo",
-        "isExtraImport": true,
-        "detail": "flask_pymongo",
-        "documentation": {}
-    },
-    {
-        "label": "PyMongo",
-        "importPath": "flask_pymongo",
-        "description": "flask_pymongo",
-        "isExtraImport": true,
-        "detail": "flask_pymongo",
-        "documentation": {}
-    },
-    {
-        "label": "CORS",
-        "importPath": "flask_cors",
-        "description": "flask_cors",
-        "isExtraImport": true,
-        "detail": "flask_cors",
-        "documentation": {}
-    },
-    {
-        "label": "CORS",
-        "importPath": "flask_cors",
-        "description": "flask_cors",
-        "isExtraImport": true,
-        "detail": "flask_cors",
-        "documentation": {}
-    },
-    {
-        "label": "Config",
-        "importPath": "config",
-        "description": "config",
-        "isExtraImport": true,
-        "detail": "config",
-        "documentation": {}
-    },
-    {
-        "label": "Config",
-        "importPath": "config",
-        "description": "config",
-        "isExtraImport": true,
-        "detail": "config",
-        "documentation": {}
-    },
-    {
         "label": "cv2",
         "kind": 6,
         "isExtraImport": true,
@@ -684,44 +628,12 @@
         "documentation": {}
     },
     {
-        "label": "MongoClient",
-        "importPath": "pymongo",
-        "description": "pymongo",
-        "isExtraImport": true,
-        "detail": "pymongo",
-        "documentation": {}
-    },
-    {
-        "label": "MongoClient",
-        "importPath": "pymongo",
-        "description": "pymongo",
-        "isExtraImport": true,
-        "detail": "pymongo",
-        "documentation": {}
-    },
-    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
-        "documentation": {}
-    },
-    {
-        "label": "load_dotenv",
-        "importPath": "dotenv",
-        "description": "dotenv",
-        "isExtraImport": true,
-        "detail": "dotenv",
-        "documentation": {}
-    },
-    {
-        "label": "load_dotenv",
-        "importPath": "dotenv",
-        "description": "dotenv",
-        "isExtraImport": true,
-        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -752,6 +664,48 @@
         "documentation": {}
     },
     {
+        "label": "torch",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch",
+        "description": "torch",
+        "detail": "torch",
+        "documentation": {}
+    },
+    {
+        "label": "transforms",
+        "importPath": "torchvision",
+        "description": "torchvision",
+        "isExtraImport": true,
+        "detail": "torchvision",
+        "documentation": {}
+    },
+    {
+        "label": "InceptionResnetV1",
+        "importPath": "facenet_pytorch",
+        "description": "facenet_pytorch",
+        "isExtraImport": true,
+        "detail": "facenet_pytorch",
+        "documentation": {}
+    },
+    {
+        "label": "MTCNN",
+        "importPath": "facenet_pytorch",
+        "description": "facenet_pytorch",
+        "isExtraImport": true,
+        "detail": "facenet_pytorch",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
         "label": "add_notification_action",
         "importPath": "routes.notification",
         "description": "routes.notification",
@@ -765,6 +719,46 @@
         "description": "routes.notification",
         "isExtraImport": true,
         "detail": "routes.notification",
+        "documentation": {}
+    },
+    {
+        "label": "PyMongo",
+        "importPath": "flask_pymongo",
+        "description": "flask_pymongo",
+        "isExtraImport": true,
+        "detail": "flask_pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -943,60 +937,6 @@
         "documentation": {}
     },
     {
-        "label": "detect_face",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def detect_face(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef encode_face(image, x, y, w, h):\n    face = image[y:y+h, x:x+w]\n    face_resized = cv2.resize(face, (100, 100))  # Resize to 100x100 for better accuracy\n    gray_face = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)\n    return gray_face.flatten()\ndef normalize_encoding(encoding):",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
-        "label": "encode_face",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def encode_face(image, x, y, w, h):\n    face = image[y:y+h, x:x+w]\n    face_resized = cv2.resize(face, (100, 100))  # Resize to 100x100 for better accuracy\n    gray_face = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)\n    return gray_face.flatten()\ndef normalize_encoding(encoding):\n    # Normalize the encoding vector\n    norm = np.linalg.norm(encoding)\n    return encoding / norm if norm > 0 else encoding\ndef calculate_cosine_similarity(encoding1, encoding2):",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
-        "label": "normalize_encoding",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def normalize_encoding(encoding):\n    # Normalize the encoding vector\n    norm = np.linalg.norm(encoding)\n    return encoding / norm if norm > 0 else encoding\ndef calculate_cosine_similarity(encoding1, encoding2):\n    # Calculate cosine similarity\n    dot_product = np.dot(encoding1, encoding2)\n    norm1 = np.linalg.norm(encoding1)\n    norm2 = np.linalg.norm(encoding2)\n    return dot_product / (norm1 * norm2)",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
-        "label": "calculate_cosine_similarity",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def calculate_cosine_similarity(encoding1, encoding2):\n    # Calculate cosine similarity\n    dot_product = np.dot(encoding1, encoding2)\n    norm1 = np.linalg.norm(encoding1)\n    norm2 = np.linalg.norm(encoding2)\n    return dot_product / (norm1 * norm2)\ndef process_face_image(face_image):\n    # Read the uploaded image file as bytes\n    image_data = face_image.read()\n    # Decode the image from bytes",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
-        "label": "process_face_image",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def process_face_image(face_image):\n    # Read the uploaded image file as bytes\n    image_data = face_image.read()\n    # Decode the image from bytes\n    nparr = np.frombuffer(image_data, np.uint8)\n    image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)\n    if image is None:\n        return None, \"Invalid image file\"\n    # Detect face in the image\n    faces = detect_face(image)",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
-        "label": "is_face_already_registered",
-        "kind": 2,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "def is_face_already_registered(face_encoding, existing_users):\n    for registered_user in existing_users:\n        registered_encoding = np.array(registered_user['face_encoding'])\n        similarity = calculate_cosine_similarity(face_encoding, normalize_encoding(registered_encoding))\n        print(f\"Calculated similarity: {similarity}\")  # Debugging: Print similarity\n        if similarity > 0.8:  # Adjust the threshold as needed (0.8 is an example)\n            return True\n    return False\napi_bp = Blueprint('api', __name__)\n@api_bp.route(\"/authorization\", methods=['POST'])",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
         "label": "get_user_by_api_key",
         "kind": 2,
         "importPath": "python-server.routes.API",
@@ -1006,20 +946,38 @@
         "documentation": {}
     },
     {
-        "label": "face_cascade",
-        "kind": 5,
-        "importPath": "python-server.routes.API",
-        "description": "python-server.routes.API",
-        "peekOfCode": "face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\ndef detect_face(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef encode_face(image, x, y, w, h):\n    face = image[y:y+h, x:x+w]\n    face_resized = cv2.resize(face, (100, 100))  # Resize to 100x100 for better accuracy\n    gray_face = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)\n    return gray_face.flatten()",
-        "detail": "python-server.routes.API",
-        "documentation": {}
-    },
-    {
         "label": "api_bp",
         "kind": 5,
         "importPath": "python-server.routes.API",
         "description": "python-server.routes.API",
-        "peekOfCode": "api_bp = Blueprint('api', __name__)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract and validate headers\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        pin = request.form.get('pin')\n        payload = request.form.get('payload', \"{}\")\n        face_image = request.files.get('face_image')",
+        "peekOfCode": "api_bp = Blueprint('api', __name__)\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\n# Load pre-trained models\nmtcnn = MTCNN(keep_all=True, device=device)\nfacenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract and validate headers\n        authorization_header = request.headers.get('Authorization')",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\n# Load pre-trained models\nmtcnn = MTCNN(keep_all=True, device=device)\nfacenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract and validate headers\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "mtcnn",
+        "kind": 5,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "mtcnn = MTCNN(keep_all=True, device=device)\nfacenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract and validate headers\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        pin = request.form.get('pin')\n        payload = request.form.get('payload', \"{}\")",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "facenet",
+        "kind": 5,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "facenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)\n@api_bp.route(\"/authorization\", methods=['POST'])\ndef get_user_by_api_key():\n    try:\n        # Extract and validate headers\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        pin = request.form.get('pin')\n        payload = request.form.get('payload', \"{}\")\n        face_image = request.files.get('face_image')",
         "detail": "python-server.routes.API",
         "documentation": {}
     },

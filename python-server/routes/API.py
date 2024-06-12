@@ -1,70 +1,21 @@
 from flask import Blueprint, request, jsonify
 from app import users, project
 from bson import ObjectId
-import cv2
 import numpy as np
 import uuid
 import bcrypt
-
-# Load the pre-trained face detection model from OpenCV
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-def detect_face(image):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-    return faces
-
-def encode_face(image, x, y, w, h):
-    face = image[y:y+h, x:x+w]
-    face_resized = cv2.resize(face, (100, 100))  # Resize to 100x100 for better accuracy
-    gray_face = cv2.cvtColor(face_resized, cv2.COLOR_BGR2GRAY)
-    return gray_face.flatten()
-
-def normalize_encoding(encoding):
-    # Normalize the encoding vector
-    norm = np.linalg.norm(encoding)
-    return encoding / norm if norm > 0 else encoding
-
-def calculate_cosine_similarity(encoding1, encoding2):
-    # Calculate cosine similarity
-    dot_product = np.dot(encoding1, encoding2)
-    norm1 = np.linalg.norm(encoding1)
-    norm2 = np.linalg.norm(encoding2)
-    return dot_product / (norm1 * norm2)
-
-def process_face_image(face_image):
-    # Read the uploaded image file as bytes
-    image_data = face_image.read()
-    
-    # Decode the image from bytes
-    nparr = np.frombuffer(image_data, np.uint8)
-    image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    
-    if image is None:
-        return None, "Invalid image file"
-    
-    # Detect face in the image
-    faces = detect_face(image)
-    if len(faces) == 0:
-        return None, "No face detected"
-    elif len(faces) > 1:
-        return None, "Multiple faces detected. Please upload an image with a single face."
-    
-    # Extract face region and encode
-    x, y, w, h = faces[0]
-    face_encoding = encode_face(image, x, y, w, h)
-    return normalize_encoding(face_encoding), None
-
-def is_face_already_registered(face_encoding, existing_users):
-    for registered_user in existing_users:
-        registered_encoding = np.array(registered_user['face_encoding'])
-        similarity = calculate_cosine_similarity(face_encoding, normalize_encoding(registered_encoding))
-        print(f"Calculated similarity: {similarity}")  # Debugging: Print similarity
-        if similarity > 0.8:  # Adjust the threshold as needed (0.8 is an example)
-            return True
-    return False
+import torch
+from torchvision import transforms
+from facenet_pytorch import InceptionResnetV1, MTCNN
+import logging
 
 api_bp = Blueprint('api', __name__)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Load pre-trained models
+mtcnn = MTCNN(keep_all=True, device=device)
+facenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
 
 @api_bp.route("/authorization", methods=['POST'])
 def get_user_by_api_key():
@@ -106,13 +57,30 @@ def get_user_by_api_key():
         if face_image is None:
             return jsonify({"message": "Face image is required", "success": False}), 400
 
-        face_encoding, error = process_face_image(face_image)
-        if error:
-            return jsonify({"error": error}), 400
+        # Read the image file and convert it to a PyTorch tensor
+        image = Image.open(face_image).convert('RGB')
+        image = transforms.ToTensor()(image).to(device)
+
+        # Detect faces using MTCNN
+        boxes, _ = mtcnn.detect(image)
+
+        if boxes is None:
+            return jsonify({"error": "No face detected"}), 400
+
+        # Crop faces and get face embeddings
+        face_encodings = []
+        for box in boxes:
+            box = box.astype(int)
+            cropped_face = image[:, box[1]:box[3], box[0]:box[2]].unsqueeze(0)
+            face_encoding = facenet(cropped_face).detach().cpu().numpy()[0]
+            face_encodings.append(face_encoding)
 
         existing_users = project_data.get("users", [])
-        if is_face_already_registered(face_encoding, existing_users):
-            return jsonify({"error": "Face already registered"}), 409
+        for registered_user in existing_users:
+            registered_encoding = np.array(registered_user['face_encoding'])
+            similarities = np.dot(face_encodings, registered_encoding.T)
+            if np.any(similarities > 0.4):  # Adjust the threshold as needed
+                return jsonify({"error": "Face already registered"}), 409
 
         if len(pin) != 6 or not pin.isdigit():
             return jsonify({"error": "PIN must be a 6-digit number"}), 400
@@ -123,11 +91,11 @@ def get_user_by_api_key():
             'id': str(uuid.uuid4()),  # Generate unique ID
             'pin': hashed_pin.decode('utf-8'),  # Convert bytes to string
             'payload': payload,
-            'face_encoding': face_encoding.tolist()
+            'face_encoding': face_encodings
         }
         existing_users.append(new_user)
         project.update_one({'_id': ObjectId(project_data['_id'])}, {'$set': {'users': existing_users}})
-        
+
         return jsonify({"user": user, "success": True, "project_id": project_id, "projectData": project_data}), 200
 
     except Exception as e:

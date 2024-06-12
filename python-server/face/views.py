@@ -1,13 +1,7 @@
 from flask import Flask, request, jsonify
-from flask_jwt_extended import JWTManager
-from flask_pymongo import PyMongo
-from flask_cors import CORS
-from config import Config 
 import cv2
 import numpy as np
-from pymongo import MongoClient
 import requests
-from dotenv import load_dotenv
 import base64
 import os
 
