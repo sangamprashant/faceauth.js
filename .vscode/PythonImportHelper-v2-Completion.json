@@ -852,6 +852,15 @@
         "documentation": {}
     },
     {
+        "label": "remove_user_from_project",
+        "kind": 2,
+        "importPath": "python-server.routes.API",
+        "description": "python-server.routes.API",
+        "peekOfCode": "def remove_user_from_project(user_id):\n    try:\n        authorization_header = request.headers.get('Authorization')\n        project_id = request.headers.get('X-Project-Code')\n        if not authorization_header or not project_id:\n            return jsonify({\"message\": \"Authorization header and Project code are required\", \"success\": False}), 400\n        user, project_data = get_user_and_project(authorization_header, project_id)\n        if not user or not project_data:\n            return jsonify({\"message\": \"Project not found or unauthorized\", \"success\": False}), 404\n        existing_users = project_data.get(\"users\", [])",
+        "detail": "python-server.routes.API",
+        "documentation": {}
+    },
+    {
         "label": "api_bp",
         "kind": 5,
         "importPath": "python-server.routes.API",

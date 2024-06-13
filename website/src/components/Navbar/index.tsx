@@ -97,6 +97,7 @@ const Navbar = () => {
                     <a
                       className="nav-link"
                       aria-current="page"
+                      key={data.label}
                       href={data.link}
                       onClick={handleNavItemClick}
                     >
@@ -104,6 +105,7 @@ const Navbar = () => {
                     </a>
                   ) : (
                     <Link
+                      key={data.label}
                       to={link}
                       className="nav-link"
                       onClick={handleNavItemClick}
@@ -116,7 +118,7 @@ const Navbar = () => {
             })}
             <motion.li
               className="nav-item"
-              key="locimentation"
+              key="Documentation"
               variants={navItemVariants}
               initial="hidden"
               animate="visible"
@@ -133,7 +135,7 @@ const Navbar = () => {
             {authenticate.isAuthenticated && (
               <motion.li
                 className="nav-item"
-                key="locimentation"
+                key="Profile"
                 variants={navItemVariants}
                 initial="hidden"
                 animate="visible"

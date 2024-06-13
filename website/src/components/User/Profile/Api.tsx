@@ -15,10 +15,9 @@ import { useAuth } from "../CheckAuth/AuthContext";
 
 type Props = {
   apiKey: string;
-  onApiKeyChange?: (newApiKey: string) => void; // Callback to notify parent component about the API key change
 };
 
-const Api: React.FC<Props> = ({ apiKey, onApiKeyChange }) => {
+const Api: React.FC<Props> = ({ apiKey }) => {
   const { handleNotification } = useAuth();
   const [showApiKey, setShowApiKey] = useState(false);
   const [apiMessage, setApiMessage] = useState<string>("");
@@ -37,6 +36,7 @@ const Api: React.FC<Props> = ({ apiKey, onApiKeyChange }) => {
   const createApiKey = async () => {
     try {
       const response = await axios.post("/api/create-key");
+      console.log({response})
       //   onApiKeyChange(response.data.newApiKey);
       setApiMessage("New API key created successfully.");
       setTimeout(() => setApiMessage(""), 3000);

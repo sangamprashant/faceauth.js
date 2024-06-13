@@ -50,7 +50,6 @@ def detect_faces(face_images):
         if len(faces) > max_faces:
             max_faces = len(faces)
             best_face_image = image
-
     return best_face_image, faces  # Returning faces as well
 
 def get_face_encodings(faces, best_face_image):
@@ -61,7 +60,6 @@ def get_face_encodings(faces, best_face_image):
         facenet_model.setInput(face_blob)
         encoding = facenet_model.forward()
         face_encodings.append(encoding.flatten())
-
     return face_encodings
 
 @api_bp.route("/authorization", methods=['POST'])
@@ -92,7 +90,6 @@ def get_user_by_api_key():
             if len(face_encodings) == 0:
                 logging.warning("face_encodings is empty")
             similarities = np.dot(face_encodings, registered_encoding.T)
-            print(similarities)
             if np.any(similarities > 0.7):  # Adjust the threshold as needed
                 return jsonify({"error": "Face already registered"}), 409
 
@@ -156,7 +153,6 @@ def login():
             if len(face_encodings) == 0:
                 logging.warning("face_encodings is empty")
             similarities = np.dot(face_encodings, registered_encoding.T)
-            print(similarities)
             if np.any(similarities > 0.7):  # Adjust the threshold as needed
                 if bcrypt.checkpw(pin.encode('utf-8'), registered_user['pin'].encode('utf-8')):
                     return jsonify({
@@ -169,8 +165,34 @@ def login():
                     }), 200
                 else:
                     return jsonify({"error": "Invalid PIN", "success": False}), 401
-
         return jsonify({"error": "Face not recognized. Login failed.", "success": False}), 401
+    except Exception as e:
+        return jsonify({"error": str(e), "message": "Internal server error", "success": False}), 500
+
+   
+@api_bp.route("/project/user/<user_id>", methods=['DELETE','POST','GET','PUT'])
+def remove_user_from_project(user_id):
+    try:
+        authorization_header = request.headers.get('Authorization')
+        project_id = request.headers.get('X-Project-Code')
+        
+        if not authorization_header or not project_id:
+            return jsonify({"message": "Authorization header and Project code are required", "success": False}), 400
+
+        user, project_data = get_user_and_project(authorization_header, project_id)
+        if not user or not project_data:
+            return jsonify({"message": "Project not found or unauthorized", "success": False}), 404
+
+        existing_users = project_data.get("users", [])
+        updated_users = [u for u in existing_users if u['id'] != user_id]
+
+        if len(updated_users) == len(existing_users):
+            return jsonify({"message": "User not found in the project", "success": False}), 404
+
+        project.update_one({'_id': ObjectId(project_data['_id'])}, {'$set': {'users': updated_users}})
+
+        return jsonify({"message": "User removed from the project successfully", "success": True}), 200
 
     except Exception as e:
+        logging.error(f"Error while removing user from project: {str(e)}")
         return jsonify({"error": str(e), "message": "Internal server error", "success": False}), 500

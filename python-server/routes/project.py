@@ -86,8 +86,6 @@ def get_project(project_id):
                 user.pop('face_encoding', None)
                 user.pop('payload', None)
                 user.pop('pin', None)
-
-        print(project_data)
         
         return jsonify(project_data), 200
     except Exception as e:
