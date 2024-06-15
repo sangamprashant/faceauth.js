@@ -123,7 +123,7 @@ def get_user_by_api_key():
         return jsonify({"error": str(e), "message": "Internal server error", "success": False}), 500
 
 
-@api_bp.route("/login", methods=['POST'])
+@api_bp.route("/authenticate ", methods=['POST'])
 def login():
     try:
         authorization_header = request.headers.get('Authorization')
