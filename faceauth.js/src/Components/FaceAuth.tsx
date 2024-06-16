@@ -161,4 +161,20 @@ export const initFaceAuth = (props: FaceAuthProps) => {
   });
 };
 
+
+export const deleteUserFromProject = async (userId: string, projectId: string, apiKey: string) => {
+  try {
+    const response = await axios.delete(`${apiBaseUrl}/project/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "X-Project-Code": projectId,
+      },
+    });
+
+    return response.data;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};
+
 export default FaceAuth;
