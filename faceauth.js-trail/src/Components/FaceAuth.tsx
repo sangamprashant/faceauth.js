@@ -1,17 +1,16 @@
-import "../assets/styles.css";
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
+import axios from "axios";
 import Modal from "./Modal";
 import PinInput from "./PinInput";
-import { ErrorImg, FaceImg, ScanningImg, SuccessImg } from "../assets/images";
 
-const apiBaseUrl = "https://faceauth-js.onrender.com";
+const apiBaseUrl = "http://127.0.0.1:8000/api/face-auth";
 
-export interface FaceAuthProps {
+interface FaceAuthProps {
   endPoint: "authenticate" | "authorization";
   projectId: string;
   apiKey: string;
-  payload?: Record<string, unknown>;
+  payload?: {}; // for register
   onSuccess?: (user: any) => void;
   onError?: (error: any) => void;
 }
@@ -35,24 +34,6 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
   const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [time, setTime] = useState(0);
-
-  useEffect(() => {
-    const handleServer = async () => {
-      console.log("Connecting to 'faceauth.js' server...");
-      try {
-        const response = await fetch(apiBaseUrl);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log("Connected to 'faceauth.js' server", data);
-      } catch (error: any) {
-        console.error("Failed to connect to 'faceauth.js' server:", error);
-      }
-    };
-
-    handleServer();
-  }, [apiBaseUrl]);
 
   useEffect(() => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -128,35 +109,26 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
   const authenticate = async () => {
     try {
       setShowScanning(true);
-
       const formData = new FormData();
       images.forEach((image) => formData.append("face_images", image));
       formData.append("pin", pin);
       if (endPoint === "authorization" && payload) {
         formData.append("payload", JSON.stringify(payload));
       }
-
-      const response = await fetch(`${apiBaseUrl}/api/face-auth/${endPoint}`, {
-        method: "POST",
-        body: formData,
+      const response = await axios.post(`${apiBaseUrl}/${endPoint}`, formData, {
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "X-Project-Code": projectId,
+          "Content-Type": "multipart/form-data",
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to authenticate: ${response.statusText}`);
-      }
-
-      const responseData = await response.json();
-
-      if (responseData.success) {
-        onSuccess && onSuccess(responseData.user);
+      if (response.data.success) {
+        onSuccess && onSuccess(response.data.user);
         setSuccess(true);
       } else {
-        onError && onError(responseData || "something went wrong");
-        setErrorMsg(responseData?.message || "something went wrong");
+        onError && onError(response?.data || "something went wrong");
+        setErrorMsg(response?.data?.message || "something went wrong");
         setError(true);
       }
     } catch (error: any) {
@@ -185,18 +157,18 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
       )}
       {showScanning ? (
         <div className="faceauth-js-message">
-          <img src={ScanningImg} width="70%" alt="Scanning..." />
+          <img src="scanning.gif" width="70%" alt="Scanning..." />
         </div>
       ) : (
         <>
           {error ? (
             <>
-              <img src={ErrorImg} width="70%" alt="Error" />
+              <img src="error.gif" width="70%" alt="Error" />
               <p>{errorMsg}</p>
             </>
           ) : success ? (
             <>
-              <img src={SuccessImg} width="70%" alt="Success" />
+              <img src="success.jpg" width="70%" alt="Success" />
               <p>
                 {endPoint === "authorization"
                   ? "User account created"
@@ -239,7 +211,7 @@ export const initFaceAuth = (props: FaceAuthProps) => {
         <Modal isOpen={true} onClose={closeModal}>
           <div className="faceauth-js-message">
             Preparing face authentication. Please wait...
-            <img src={FaceImg} width="70%" alt="Preparing..." />
+            <img src="face.gif" width="70%" alt="Preparing..." />
           </div>
         </Modal>
       );
@@ -273,10 +245,9 @@ export const deleteUserFromProject = async (
   apiKey: string
 ) => {
   try {
-    const response = await fetch(
-      `${apiBaseUrl}/api/face-auth/project/user/${userId}`,
+    const response = await axios.delete(
+      `${apiBaseUrl}/project/user/${userId}`,
       {
-        method: "DELETE",
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "X-Project-Code": projectId,
@@ -284,13 +255,9 @@ export const deleteUserFromProject = async (
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`Failed to delete user: ${response.statusText}`);
-    }
-
-    return await response.json();
+    return response.data;
   } catch (error: any) {
-    throw error.message;
+    throw error.response.data;
   }
 };
 

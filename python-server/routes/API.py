@@ -80,7 +80,7 @@ def get_user_by_api_key():
 
         best_face_image, faces = detect_faces(face_images)
         if len(faces) == 0:
-            return jsonify({"error": "No face detected in any image"}), 400
+            return jsonify({"message": "No face detected in any image"}), 400
 
         face_encodings = get_face_encodings(faces, best_face_image)
 
@@ -91,10 +91,10 @@ def get_user_by_api_key():
                 logging.warning("face_encodings is empty")
             similarities = np.dot(face_encodings, registered_encoding.T)
             if np.any(similarities > 0.7):  # Adjust the threshold as needed
-                return jsonify({"error": "Face already registered"}), 409
+                return jsonify({"message": "Face already registered"}), 409
 
         if len(pin) != 6 or not pin.isdigit():
-            return jsonify({"error": "PIN must be a 6-digit number"}), 400
+            return jsonify({"message": "PIN must be a 6-digit number"}), 400
 
         hashed_pin = bcrypt.hashpw(pin.encode('utf-8'), bcrypt.gensalt())
 
@@ -123,7 +123,7 @@ def get_user_by_api_key():
         return jsonify({"error": str(e), "message": "Internal server error", "success": False}), 500
 
 
-@api_bp.route("/authenticate ", methods=['POST'])
+@api_bp.route("/authenticate", methods=['POST'])
 def login():
     try:
         authorization_header = request.headers.get('Authorization')
@@ -135,7 +135,7 @@ def login():
             return jsonify({"message": "Authorization header and Project code are required", "success": False}), 400
 
         if not pin or len(pin) != 6 or not pin.isdigit():
-            return jsonify({"error": "PIN must be a 6-digit number", "success": False}), 400
+            return jsonify({"message": "PIN must be a 6-digit number", "success": False}), 400
 
         user, project_data = get_user_and_project(authorization_header, project_id)
         if not user or not project_data:
@@ -143,7 +143,7 @@ def login():
 
         best_face_image, faces = detect_faces(face_images)
         if len(faces) == 0:
-            return jsonify({"error": "No face detected in any image"}), 400
+            return jsonify({"message": "No face detected in any image"}), 400
 
         face_encodings = get_face_encodings(faces, best_face_image)
 
@@ -164,8 +164,8 @@ def login():
                         }
                     }), 200
                 else:
-                    return jsonify({"error": "Invalid PIN", "success": False}), 401
-        return jsonify({"error": "Face not recognized. Login failed.", "success": False}), 401
+                    return jsonify({"message": "Invalid PIN", "success": False}), 401
+        return jsonify({"message": "Face not recognized. Login failed.", "success": False}), 401
     except Exception as e:
         return jsonify({"error": str(e), "message": "Internal server error", "success": False}), 500
 

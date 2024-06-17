@@ -19,7 +19,7 @@ def index():
     try:
         return jsonify({"message": "Connected to server", "success":True}), 200
     except Exception as e:
-        return jsonify({"error": str(e), "success":False}), 500
+        return jsonify({"error": str(e),"message":"Failed to connect to server", "success":False}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))

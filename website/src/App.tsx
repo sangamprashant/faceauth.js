@@ -16,11 +16,8 @@ import {
 import { Login, Register, Verify } from "./components/Auth";
 import { Profile, ProjectOpen } from "./components/User";
 import { AuthProvider } from "./components/User/CheckAuth/AuthContext";
-import { SERVER } from "./config";
 
 function App() {
-  console.log({ SERVER });
-
   return (
     <BrowserRouter>
       <AuthProvider>
