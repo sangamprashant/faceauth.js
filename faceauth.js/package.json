@@ -1,6 +1,6 @@
 {
   "name": "faceauth.js",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -26,6 +26,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "axios": "^1.7.2",
+    "cpx": "^1.5.0",
     "csstype": "^3.1.3",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",

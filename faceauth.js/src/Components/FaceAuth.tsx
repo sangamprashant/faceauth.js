@@ -3,7 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Modal from "./Modal";
 import PinInput from "./PinInput";
-import { ErrorImg, FaceImg, ScanningImg, SuccessImg } from "../assets/images";
+
+import FaceImg from "../assets/face.gif";
+import ScanningImg from "../assets/scanning.gif";
+import SuccessImg from "../assets/success.jpg";
+import ErrorImg from "../assets/error.gif";
 
 const apiBaseUrl = "https://faceauth-js.onrender.com";
 
