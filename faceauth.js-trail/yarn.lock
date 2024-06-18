@@ -552,10 +552,10 @@ esutils@^2.0.2:
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-faceauth.js@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.npmjs.org/faceauth.js/-/faceauth.js-0.0.10.tgz"
-  integrity sha512-WG+OoAA6Vwsxdcl17VCWB5Tf/FohzfHQmKo0ZLaiCowwESzhzBPrR5Xz+63IJ0X6Kzl9xzTRE0UtTMRFQkKOWQ==
+faceauth.js@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/faceauth.js/-/faceauth.js-2.0.4.tgz"
+  integrity sha512-nYcLBLSqA6yEUAYcEaKRJbTbKtV+Y14Y2i3POB6Yqw2/dZytPOFxvDgtvFHqjOvy8blI+SXeUDt1faOnYe2fyQ==
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"

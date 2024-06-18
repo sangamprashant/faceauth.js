@@ -28,4 +28,5 @@ pacakage-lock.json
 tsconfig.json
 tsup.config.tsconfig
 src
+public
 .env

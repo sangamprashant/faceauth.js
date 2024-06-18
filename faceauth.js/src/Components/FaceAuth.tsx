@@ -3,14 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Modal from "./Modal";
 import PinInput from "./PinInput";
-
-import FaceImg from "../assets/face.gif";
-import ScanningImg from "../assets/scanning.gif";
-import SuccessImg from "../assets/success.jpg";
-import ErrorImg from "../assets/error.gif";
-
 const apiBaseUrl = "https://faceauth-js.onrender.com";
-
 export interface FaceAuthProps {
   endPoint: "authenticate" | "authorization";
   projectId: string;
@@ -19,7 +12,6 @@ export interface FaceAuthProps {
   onSuccess?: (user: any) => void;
   onError?: (error: any) => void;
 }
-
 const FaceAuth: React.FC<FaceAuthProps> = ({
   endPoint,
   projectId,
@@ -39,24 +31,6 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
   const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [time, setTime] = useState(0);
-
-  useEffect(() => {
-    const handleServer = async () => {
-      console.log("Connecting to 'faceauth.js' server...");
-      try {
-        const response = await fetch(apiBaseUrl);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log("Connected to 'faceauth.js' server", data);
-      } catch (error: any) {
-        console.error("Failed to connect to 'faceauth.js' server:", error);
-      }
-    };
-
-    handleServer();
-  }, [apiBaseUrl]);
 
   useEffect(() => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -132,7 +106,6 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
   const authenticate = async () => {
     try {
       setShowScanning(true);
-
       const formData = new FormData();
       images.forEach((image) => formData.append("face_images", image));
       formData.append("pin", pin);
@@ -149,13 +122,9 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to authenticate: ${response.statusText}`);
-      }
-
       const responseData = await response.json();
 
-      if (responseData.success) {
+      if (response.ok) {
         onSuccess && onSuccess(responseData.user);
         setSuccess(true);
       } else {
@@ -189,18 +158,30 @@ const FaceAuth: React.FC<FaceAuthProps> = ({
       )}
       {showScanning ? (
         <div className="faceauth-js-message">
-          <img src={ScanningImg} width="70%" alt="Scanning..." />
+          <img
+            src="https://raw.githubusercontent.com/sangamprashant/faceauth.js/main/faceauth.js/src/assets/scanning.gif?cache-control=max-age=31536000"
+            width="70%"
+            alt="Scanning..."
+          />
         </div>
       ) : (
         <>
           {error ? (
             <>
-              <img src={ErrorImg} width="70%" alt="Error" />
+              <img
+                src="https://raw.githubusercontent.com/sangamprashant/faceauth.js/main/faceauth.js/src/assets/error.gif?cache-control=max-age=31536000"
+                width="70%"
+                alt="Error"
+              />
               <p>{errorMsg}</p>
             </>
           ) : success ? (
             <>
-              <img src={SuccessImg} width="70%" alt="Success" />
+              <img
+                src="https://raw.githubusercontent.com/sangamprashant/faceauth.js/main/faceauth.js/src/assets/success.jpg?cache-control=max-age=31536000"
+                width="70%"
+                alt="Success"
+              />
               <p>
                 {endPoint === "authorization"
                   ? "User account created"
@@ -243,7 +224,11 @@ export const initFaceAuth = (props: FaceAuthProps) => {
         <Modal isOpen={true} onClose={closeModal}>
           <div className="faceauth-js-message">
             Preparing face authentication. Please wait...
-            <img src={FaceImg} width="70%" alt="Preparing..." />
+            <img
+              src="https://raw.githubusercontent.com/sangamprashant/faceauth.js/main/faceauth.js/src/assets/face.gif?cache-control=max-age=31536000"
+              width="70%"
+              alt="Preparing..."
+            />
           </div>
         </Modal>
       );
@@ -254,17 +239,21 @@ export const initFaceAuth = (props: FaceAuthProps) => {
             <FaceAuth
               {...props}
               onSuccess={(user) => {
-                // closeModal();
                 resolve(user);
+                setTimeout(() => {
+                  closeModal();
+                }, 5000);
               }}
               onError={(error) => {
-                // closeModal();
                 reject(error);
+                setTimeout(() => {
+                  closeModal();
+                }, 5000);
               }}
             />
           </Modal>
         );
-      }, 3000); // 3-second delay before starting face authentication
+      }, 4000);
     };
 
     showMessage();
@@ -295,6 +284,20 @@ export const deleteUserFromProject = async (
     return await response.json();
   } catch (error: any) {
     throw error.message;
+  }
+};
+
+export const handleFaceAuth = async () => {
+  console.log("Connecting to 'faceauth.js' server...");
+  try {
+    const response = await fetch(apiBaseUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log("Connected to 'faceauth.js' server");
+  } catch (error: any) {
+    console.error("Failed to connect to 'faceauth.js' server");
   }
 };
 

@@ -1,7 +1,13 @@
 import "faceauth.js/css";
 import { deleteUserFromProject, initFaceAuth } from "faceauth.js";
+import { useEffect } from "react";
+import { handleFaceAuth } from "faceauth.js";
 
 const App = () => {
+  useEffect(() => {
+    handleFaceAuth();
+  }, []);
+
   const handleAuth = () => {
     initFaceAuth({
       endPoint: "authenticate",
