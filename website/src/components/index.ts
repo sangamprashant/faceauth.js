@@ -12,6 +12,7 @@ import Result from "./Result";
 import Working from "./Working";
 import Documentation from "./Documentation";
 import ModalShow from "./Modal";
+import TryOnline from "./Documentation/TryOnline";
 
 export {
   Navbar,
@@ -27,5 +28,6 @@ export {
   Documentation,
   Result,
   Working,
-  ModalShow
+  ModalShow,
+  TryOnline
 };

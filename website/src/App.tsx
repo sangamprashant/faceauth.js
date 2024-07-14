@@ -11,6 +11,7 @@ import {
   Navbar,
   Result,
   Service,
+  TryOnline,
   Tutorial,
 } from "./components";
 import { Login, Register, Verify } from "./components/Auth";
@@ -34,6 +35,7 @@ function App() {
             <Route path="/get-started" element={<Register />} />
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/verify" element={<Verify />} />
+            <Route path="/try-online" element={<TryOnline />} />
             {/* Protected */}
             <Route path="/profile" element={<Profile />} />
             <Route path="/project" element={<ProjectOpen />} />

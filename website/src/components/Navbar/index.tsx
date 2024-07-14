@@ -79,7 +79,7 @@ const Navbar = () => {
           id="navbarSupportedContent"
           ref={navbarCollapseRef}
         >
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto ">
             {NavPublicItems.map((data, index) => {
               const link = data.link.startsWith("/#")
                 ? data.link.replace("/#", "/")
@@ -116,6 +116,7 @@ const Navbar = () => {
                 </motion.li>
               );
             })}
+
             <motion.li
               className="nav-item"
               key="Documentation"
@@ -124,13 +125,41 @@ const Navbar = () => {
               animate="visible"
               transition={{ delay: 0.1, duration: 0.7 }}
             >
-              <Link
-                className="nav-link"
-                to="/documentation"
-                onClick={handleNavItemClick}
-              >
-                Documentation
-              </Link>
+              <div className="nav-link dropdown">
+                <li
+                  className=" dropdown-toggle"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Developer Tool
+                </li>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li>
+                    {" "}
+                    <Link
+                      className="dropdown-item"
+                      to="/documentation"
+                      onClick={handleNavItemClick}
+                    >
+                      Documentation
+                    </Link>
+                  </li>
+                  <li>
+                    {" "}
+                    <Link
+                      className="dropdown-item"
+                      to="/try-online"
+                      onClick={handleNavItemClick}
+                    >
+                      Try Online
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </motion.li>
             {authenticate.isAuthenticated && (
               <motion.li
