@@ -1,0 +1,23 @@
+.image-try-select-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+}
+
+.image-try-select-grid .image {
+  width: 100%;
+  background-color: antiquewhite;
+  padding: 10px;
+}
+
+.image-try-select-grid .image img {
+  background-color: aqua;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-try-select-grid .image img:hover {
+  transform: scale(1.1);
+}
