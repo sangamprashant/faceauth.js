@@ -12,9 +12,11 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "axios": "^1.7.2",
+    "highlight.js": "^11.10.0",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-highlight": "^0.15.0",
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
@@ -26,10 +28,11 @@
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/react-highlight": "^0.12.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
-    "antd": "^5.18.0",
+    "antd": "^5.19.2",
     "bootstrap": "^5.3.3",
     "component-craftsman": "^1.0.10",
     "eslint": "^8.56.0",

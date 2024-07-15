@@ -1,23 +1,27 @@
 .image-try-select-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-content: space-between;
 }
 
 .image-try-select-grid .image {
   width: 100%;
-  background-color: antiquewhite;
+  background-color: rgb(247, 247, 247);
   padding: 10px;
 }
 
 .image-try-select-grid .image img {
-  background-color: aqua;
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
   transition: transform 0.3s ease;
+  border: 2px solid rgb(234, 234, 234);
 }
 
 .image-try-select-grid .image img:hover {
   transform: scale(1.1);
+}
+
+.image-try-select-grid .image img.active {
+  border: 2px solid #0027d9;
 }

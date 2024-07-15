@@ -185,6 +185,30 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Flask",
         "importPath": "flask",
         "description": "flask",
@@ -687,6 +711,14 @@
         "documentation": {}
     },
     {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
         "label": "add_notification_action",
         "importPath": "routes.notification",
         "description": "routes.notification",
@@ -773,6 +805,14 @@
         "description": "routes.API",
         "isExtraImport": true,
         "detail": "routes.API",
+        "documentation": {}
+    },
+    {
+        "label": "match_image_bp",
+        "importPath": "routes.matchImage",
+        "description": "routes.matchImage",
+        "isExtraImport": true,
+        "detail": "routes.matchImage",
         "documentation": {}
     },
     {
@@ -1286,6 +1326,87 @@
         "description": "python-server.routes.history",
         "peekOfCode": "history_bp = Blueprint('history', __name__)\n# Function to add a new action to a user's history\ndef add_history_action(user_id, action):\n    timestamp = datetime.now(timezone.utc).isoformat()\n    history_entry = {\"action\": action, \"timestamp\": timestamp}\n    history.update_one(\n        {'user_id': ObjectId(user_id)},\n        {'$push': {'actions': history_entry}},\n        upsert=True\n    )",
         "detail": "python-server.routes.history",
+        "documentation": {}
+    },
+    {
+        "label": "detect_faces",
+        "kind": 2,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "def detect_faces(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef get_face_encodings(faces, image):\n    face_encodings = []\n    for (x, y, w, h) in faces:\n        face = image[y:y+h, x:x+w]\n        face_blob = cv2.dnn.blobFromImage(face, 1.0 / 255, (96, 96), (0, 0, 0), swapRB=True, crop=False)\n        facenet_model.setInput(face_blob)",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "get_face_encodings",
+        "kind": 2,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "def get_face_encodings(faces, image):\n    face_encodings = []\n    for (x, y, w, h) in faces:\n        face = image[y:y+h, x:x+w]\n        face_blob = cv2.dnn.blobFromImage(face, 1.0 / 255, (96, 96), (0, 0, 0), swapRB=True, crop=False)\n        facenet_model.setInput(face_blob)\n        encoding = facenet_model.forward()\n        face_encodings.append(encoding.flatten())\n    return face_encodings\n@match_image_bp.route(\"/match-image\", methods=['POST'])",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "match_images_endpoint",
+        "kind": 2,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "def match_images_endpoint():\n    try:\n        data = request.json\n        model_keys = data.get('modals', [])\n        selected_key = data.get('image', None)\n        if not model_keys or selected_key is None:\n            return jsonify({\"message\": \"Model keys and selected image key are required\", \"success\": False}), 400\n        model_encodings = []\n        for key in model_keys:\n            image_path = image_paths[int(key) - 1]",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "handle_match_image",
+        "kind": 2,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "def handle_match_image():\n    try:\n        modal_images = request.files.getlist('modals')\n        selected_image = request.files.get('image')\n        modal_images_data = [Image.open(img) for img in modal_images]\n        selected_image_data = Image.open(selected_image)\n        result = match_images(modal_images_data, selected_image_data)\n        return jsonify(result), 200\n    except Exception as e:\n        logging.error(f\"Error in handle_match_image: {str(e)}\")",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "match_images",
+        "kind": 2,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "def match_images(modal_images, selected_image):\n    try:\n        if not modal_images or selected_image is None:\n            return {\"message\": \"Please select an image to match\", \"success\": False}\n        modal_images_np = [np.array(img) for img in modal_images]\n        selected_image_np = np.array(selected_image)\n        modal_encodings = []\n        for image in modal_images_np:\n            faces = detect_faces(image)\n            if faces is not None:",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "image_paths",
+        "kind": 5,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "image_paths = [\n    \"assets/try_once/1.jpg\",\n    \"assets/try_once/2.jpeg\",\n    \"assets/try_once/3.jpeg\",\n    \"assets/try_once/4.jpeg\",\n    \"assets/try_once/5.jpeg\",\n    \"assets/try_once/6.webp\"\n]\nmatch_image_bp = Blueprint('matchImage', __name__)\n# Load pre-trained models",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "match_image_bp",
+        "kind": 5,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "match_image_bp = Blueprint('matchImage', __name__)\n# Load pre-trained models\nface_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\nfacenet_model = cv2.dnn.readNetFromTorch(\"models/openface.nn4.small2.v1.t7\")\ndef detect_faces(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef get_face_encodings(faces, image):\n    face_encodings = []",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "face_cascade",
+        "kind": 5,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\nfacenet_model = cv2.dnn.readNetFromTorch(\"models/openface.nn4.small2.v1.t7\")\ndef detect_faces(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef get_face_encodings(faces, image):\n    face_encodings = []\n    for (x, y, w, h) in faces:\n        face = image[y:y+h, x:x+w]",
+        "detail": "python-server.routes.matchImage",
+        "documentation": {}
+    },
+    {
+        "label": "facenet_model",
+        "kind": 5,
+        "importPath": "python-server.routes.matchImage",
+        "description": "python-server.routes.matchImage",
+        "peekOfCode": "facenet_model = cv2.dnn.readNetFromTorch(\"models/openface.nn4.small2.v1.t7\")\ndef detect_faces(image):\n    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)\n    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))\n    return faces\ndef get_face_encodings(faces, image):\n    face_encodings = []\n    for (x, y, w, h) in faces:\n        face = image[y:y+h, x:x+w]\n        face_blob = cv2.dnn.blobFromImage(face, 1.0 / 255, (96, 96), (0, 0, 0), swapRB=True, crop=False)",
+        "detail": "python-server.routes.matchImage",
         "documentation": {}
     },
     {
